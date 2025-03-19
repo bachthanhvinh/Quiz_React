@@ -26,6 +26,16 @@ class MyComponent extends React.Component {
   handleOnMoverOver(event) {
     console.log(event);
   }
+  handleOnChangeInput = (event) => {
+    this.setState({
+      name: event.target.value,
+    });
+    // console.log(event);
+  };
+  handleOnSubmit = (event) => {
+    event.preventDefault();
+    console.log(this.state);
+  };
   render() {
     return (
       <div>
@@ -38,6 +48,13 @@ class MyComponent extends React.Component {
         >
           Click me
         </button>
+        <form onSubmit={(event) => this.handleOnSubmit(event)}>
+          <input
+            type="text"
+            onChange={(event) => this.handleOnChangeInput(event)}
+          />
+          <button>Submit</button>
+        </form>
       </div>
     );
   }
