@@ -10,7 +10,7 @@ class DisplayInfor extends React.Component {
   };
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     // distructuring
     const { listUsers, users } = this.props;
     return (
@@ -29,7 +29,7 @@ class DisplayInfor extends React.Component {
         {this.state.isShowListUser && (
           <div>
             {listUsers.map((user, index) => {
-              console.log(">>>> check map user", user);
+              // console.log(">>>> check map user", user);
 
               return (
                 <div key={user.id} className={+user.age > 18 ? "green" : "red"}>
