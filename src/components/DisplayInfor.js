@@ -1,4 +1,5 @@
 import React from "react";
+import "./DisplayInfor.scss";
 class DisplayInfor extends React.Component {
   state = {
     isShowListUser: true,
@@ -14,34 +15,39 @@ class DisplayInfor extends React.Component {
     // distructuring
     const { listUsers, users } = this.props;
     return (
-      <div>
-        <div>
-          <span
-            onClick={(e) => {
-              this.handleShowHide();
-            }}
-          >
-            {this.state.isShowListUser === true
-              ? "Hide list users: "
-              : "Show list users:"}
-          </span>
-        </div>
-        {this.state.isShowListUser && (
+      <>
+        <div className="display-infor-container">
           <div>
-            {listUsers.map((user, index) => {
-              // console.log(">>>> check map user", user);
-
-              return (
-                <div key={user.id} className={+user.age > 18 ? "green" : "red"}>
-                  <div>My name {user.name} </div>
-                  <div>My age {user.age}</div>
-                  <hr />
-                </div>
-              );
-            })}
+            <span
+              onClick={(e) => {
+                this.handleShowHide();
+              }}
+            >
+              {this.state.isShowListUser === true
+                ? "Hide list users: "
+                : "Show list users:"}
+            </span>
           </div>
-        )}
-      </div>
+          {this.state.isShowListUser && (
+            <div>
+              {listUsers.map((user, index) => {
+                // console.log(">>>> check map user", user);
+
+                return (
+                  <div
+                    key={user.id}
+                    className={+user.age > 18 ? "green" : "red"}
+                  >
+                    <div>My name {user.name} </div>
+                    <div>My age {user.age}</div>
+                    <hr />
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </>
     );
   }
 }
