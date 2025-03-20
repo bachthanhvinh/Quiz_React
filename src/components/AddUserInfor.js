@@ -30,7 +30,7 @@ class AddUserInfor extends React.Component {
   };
   render() {
     return (
-      <div>
+      <>
         My name is {this.state.name} and I'm {this.state.age}
         <form onSubmit={(event) => this.handleOnSubmit(event)}>
           <label>Your name:</label>
@@ -47,7 +47,7 @@ class AddUserInfor extends React.Component {
           />
           <button>Submit</button>
         </form>
-      </div>
+      </>
     );
   }
 }
