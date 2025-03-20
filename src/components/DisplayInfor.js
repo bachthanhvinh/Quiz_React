@@ -18,7 +18,7 @@ class DisplayInfor extends React.Component {
     return (
       <>
         <div className="display-infor-container">
-          <img src={logo} />
+          {/* <img src={logo} /> */}
           <div>
             <span
               onClick={(e) => {
@@ -42,7 +42,13 @@ class DisplayInfor extends React.Component {
                   >
                     <div>My name {user.name} </div>
                     <div>My age {user.age}</div>
-                    <hr />
+                    <div>
+                      <button
+                        onClick={() => this.props.handleDeleteUser(user.id)}
+                      >
+                        X
+                      </button>
+                    </div>
                   </div>
                 );
               })}
