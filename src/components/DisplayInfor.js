@@ -2,9 +2,31 @@ import React from "react";
 import "./DisplayInfor.scss";
 import logo from "./../logo.svg";
 class DisplayInfor extends React.Component {
-  state = {
-    isShowListUser: true,
-  };
+  constructor(props) {
+    console.log("call constructor: 1");
+    super(props);
+    this.state = {
+      isShowListUser: true,
+    };
+  }
+
+  componentDidMount() {
+    console.log(">>> call me component did mount");
+    setTimeout(() => {
+      document.title = "học lập trình";
+    }, 3000);
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log(">>> call me component did update", this.props, prevState);
+
+    if (this.props.listUsers !== prevProps.listUsers) {
+      if (this.props.listUsers.length === 5) {
+        alert("You got 5 users");
+      }
+    }
+  }
+
   handleShowHide = () => {
     this.setState({
       isShowListUser: !this.state.isShowListUser,
@@ -12,7 +34,7 @@ class DisplayInfor extends React.Component {
   };
 
   render() {
-    // console.log(this.props);
+    console.log(">> call me render : ");
     // distructuring
     const { listUsers, users } = this.props;
     return (
