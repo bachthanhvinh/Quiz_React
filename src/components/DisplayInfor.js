@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./DisplayInfor.scss";
 import logo from "./../logo.svg";
 //stateless vs stateful
@@ -43,10 +43,19 @@ import logo from "./../logo.svg";
 const DisplayInfor = (props) => {
   const { listUsers, users } = props;
 
+  const [isShowHileListUser, setShowHileListUser] = useState(true);
+  const handleShowUser = () => {
+    setShowHileListUser(!isShowHileListUser);
+  };
   return (
     <>
       <div className="display-infor-container">
-        {true && (
+        <div>
+          <span onClick={() => handleShowUser()}>
+            {isShowHileListUser === true ? "Hile-users" : "Show-list-users"}
+          </span>
+        </div>
+        {isShowHileListUser && (
           <div>
             {listUsers.map((user, index) => {
               // console.log(">>>> check map user", user);
