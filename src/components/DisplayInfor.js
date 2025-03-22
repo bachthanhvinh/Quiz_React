@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./DisplayInfor.scss";
 import logo from "./../logo.svg";
 //stateless vs stateful
@@ -46,6 +46,15 @@ const DisplayInfor = (props) => {
   const handleShowUser = () => {
     setShowHileListUser(!isShowHileListUser);
   };
+
+  console.log(">>> call me render");
+
+  useEffect(() => {
+    if (listUser.length === 0) {
+      alert("You deleted all the users");
+    }
+    console.log(">>> call me useEffect");
+  }, [listUser]);
   return (
     <>
       <div className="display-infor-container">
