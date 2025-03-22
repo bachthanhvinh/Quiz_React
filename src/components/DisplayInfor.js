@@ -41,8 +41,7 @@ import logo from "./../logo.svg";
 // }
 
 const DisplayInfor = (props) => {
-  const { listUsers, users } = props;
-
+  const { listUser, users } = props;
   const [isShowHileListUser, setShowHileListUser] = useState(true);
   const handleShowUser = () => {
     setShowHileListUser(!isShowHileListUser);
@@ -57,10 +56,9 @@ const DisplayInfor = (props) => {
         </div>
         {isShowHileListUser && (
           <div>
-            {listUsers.map((user, index) => {
-              // console.log(">>>> check map user", user);
-
+            {listUser.map((user, index) => {
               return (
+                // console.log(">>>> check map user", user.name);
                 <div key={user.id} className={+user.age > 18 ? "green" : "red"}>
                   <div>My name {user.name} </div>
                   <div>My age {user.age}</div>
