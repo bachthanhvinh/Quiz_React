@@ -13,10 +13,10 @@ body {
 .app-container {
   .header-container {
     .navbar-nav {
-    }
-    .nav-link {
-      &.active {
-        color: red;
+      .nav-link {
+        &.active {
+          color: rgb(30, 227, 253);
+        }
       }
     }
   }
