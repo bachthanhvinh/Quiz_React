@@ -1,5 +1,5 @@
 body {
-  padding: 40px;
+  padding: 20px;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -11,8 +11,40 @@ body {
 }
 
 .app-container {
+  position: relative;
   .header-container {
-    .navbar-nav {
+    .btn-login {
+      border: 1px solid #6a6a6a;
+      border-radius: 5px;
+      padding: 3px 10px;
+      margin-right: 20px;
+      background-color: transparent;
+      transition: background-color 0.4s;
+      font-size: 18px;
+      &:hover {
+        background-color: rgb(30, 30, 30);
+        color: white;
+      }
+    }
+    .btn-signUp {
+      border: 1px solid #6a6a6a;
+      border-radius: 5px;
+      padding: 7px 15px;
+      // margin-right: 20px;
+      background-color: rgb(30, 30, 30);
+      transition: background-color 0.4s;
+      font-size: 18px;
+      color: white;
+      &:hover {
+        background-color: rgb(57, 57, 57);
+      }
+    }
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    .navbar {
+      margin-top: 20px;
+      background-color: rgba(0, 0, 0, 0) !important;
       .nav-link {
         &.active {
           color: rgb(30, 227, 253);
@@ -20,4 +52,29 @@ body {
       }
     }
   }
+  .homepage-better {
+    z-index: 100;
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    width: 30%;
+    &__h2 {
+      width: 330px;
+      color: black;
+      font-size: 50px;
+      font-weight: 300;
+    }
+    &__p {
+      margin-top: 20px;
+      line-height: 1.6;
+      color: #5e5e5e;
+      width: 310px;
+    }
+  }
+}
+
+video {
+  margin: -13% 0 0 0;
+
+  width: 100%;
 }
