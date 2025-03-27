@@ -15,7 +15,13 @@ function ModalCreateUser() {
         Launch demo modal
       </Button>
 
-      <Modal show={show} onHide={handleClose} size="xl" backdrop="static">
+      <Modal
+        show={show}
+        onHide={handleClose}
+        size="xl"
+        backdrop="static"
+        className="modal-add-user"
+      >
         <Modal.Header closeButton>
           <Modal.Title>Add new user</Modal.Title>
         </Modal.Header>
