@@ -1,0 +1,51 @@
+.admin-container {
+  display: flex;
+  .admin-sidebar {
+    .pro-sidebar {
+      height: 100vh !important;
+    }
+  }
+  .admin-content {
+    width: 100%;
+    .admin-header {
+      height: 40px;
+      border: 1px solid green;
+    }
+    .admin-main {
+      border: 1px solid red;
+    }
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.sidebar-btn-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .sidebar-btn {
+    transition: width 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 35px;
+    color: #adadad;
+    text-decoration: none;
+    padding: 1px 15px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 40px;
+    margin: 0 auto;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    span {
+      margin-left: 5px;
+      font-size: 13px;
+    }
+    &:hover {
+      color: #ddd;
+    }
+  }
+}

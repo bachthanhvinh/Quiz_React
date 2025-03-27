@@ -55,7 +55,7 @@ body {
   .homepage-better {
     z-index: 100;
     position: absolute;
-    top: 20%;
+    top: 250%;
     left: 10%;
     width: 30%;
     &__h2 {
@@ -74,6 +74,7 @@ body {
 }
 
 video {
+  position: fixed;
   margin: -13% 0 0 0;
 
   width: 100%;
