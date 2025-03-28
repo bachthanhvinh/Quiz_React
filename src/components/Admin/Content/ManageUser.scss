@@ -1,5 +1,28 @@
 .manageUser-container__content {
-  .user-content {
+  .btn-add-new {
+    margin: 15px 0;
+  }
+  .button-add {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 10px;
+    background-color: #eeee;
+    border-radius: 5px;
+    width: fit-content;
+    border: none;
+    cursor: pointer;
+    transition: 0.4s;
+    &:hover {
+      background-color: #c5c4c4ee;
+      color: white;
+    }
+  }
+}
+.manageUser-container {
+  &__title {
+    font-weight: 600;
+    font-size: 20px;
   }
 }
 .modal-add-user {

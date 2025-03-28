@@ -5,13 +5,21 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { FcPlus } from "react-icons/fc";
 
-function GridComplexExample() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
-  const [role, setRole] = useState("USER");
-  const [image, setImage] = useState("");
-  const [previewImage, setPreviewImage] = useState("");
+function GridComplexExample(props) {
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    username,
+    setUsername,
+    role,
+    setRole,
+    image,
+    setImage,
+    previewImage,
+    setPreviewImage,
+  } = props;
   const handleUploadImage = (event) => {
     if (event.target && event.target.files && event.target.files[0]) {
       setPreviewImage(URL.createObjectURL(event.target.files[0]));
@@ -19,6 +27,7 @@ function GridComplexExample() {
     }
     console.log("upload File", event.target.files[0]);
   };
+
   return (
     <Form>
       <Row className="mb-3">
