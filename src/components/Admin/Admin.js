@@ -19,8 +19,9 @@ const Admin = (props) => {
         <div className="admin-header">
           <FaBars onClick={() => setCollapsed(!collapsed)} />
         </div>
-        <div className="admin-main"></div>
-        <Outlet />
+        <div className="admin-main">
+          <Outlet />
+        </div>
       </div>
       <ToastContainer
         position="top-right"
