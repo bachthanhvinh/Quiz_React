@@ -2,9 +2,8 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import GridComplexExample from "./FormAddNewUser";
-import axios from "axios";
 import { Bounce, toast } from "react-toastify";
-
+import { postCreateNewUser } from "../../../services/apiServices";
 function ModalCreateUser(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -36,45 +35,25 @@ function ModalCreateUser(props) {
   };
   const handSubmitCreactUser = async () => {
     //validate
-    const isValidateEmail = validateEmail(email);
-    if (!isValidateEmail) {
-      toast.error("Invalid Email !", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+    // const isValidateEmail = validateEmail(email);
+    // if (!isValidateEmail) {
+    //   toast.error("Invalid Email !");
 
-      return;
-    }
+    //   return;
+    // }
     if (!password) {
       toast.error("Invalid password");
       return;
     }
-    //submit data
-    const data = new FormData();
-    data.append("email", email);
-    data.append("password", password);
-    data.append("username", username);
-    data.append("role", role);
-    data.append("userImage", image);
 
-    let res = await axios.post(
-      "http://localhost:8081/api/v1/participant",
-      data
-    );
-    console.log(">>>check res: ", res.data);
-    if (res.data && res.data.EC === 0) {
-      toast.success(res.data.EM);
+    let data = await postCreateNewUser(email, password, username, role, image);
+    console.log("component res: ", data);
+    if (data && data.EC === 0) {
+      toast.success(data.EM);
       handleClose();
     }
-    if (res.data && res.data.EC !== 0) {
-      toast.error(res.data.EM);
+    if (data && data.EC !== 0) {
+      toast.error(data.EM);
     }
   };
   return (
