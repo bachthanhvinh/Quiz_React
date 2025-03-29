@@ -12,7 +12,7 @@ function ModalCreateUser(props) {
   const [image, setImage] = useState("");
   const [previewImage, setPreviewImage] = useState("");
 
-  const { show, setShow } = props;
+  const { show, setShow, onUserAdded } = props;
   // const [show, setShow] = useState(false);
 
   const handleClose = () => {
@@ -34,13 +34,13 @@ function ModalCreateUser(props) {
       );
   };
   const handSubmitCreactUser = async () => {
-    //validate
-    // const isValidateEmail = validateEmail(email);
-    // if (!isValidateEmail) {
-    //   toast.error("Invalid Email !");
+    // validate;
+    const isValidateEmail = validateEmail(email);
+    if (!isValidateEmail) {
+      toast.error("Invalid Email !");
 
-    //   return;
-    // }
+      return;
+    }
     if (!password) {
       toast.error("Invalid password");
       return;
@@ -51,6 +51,7 @@ function ModalCreateUser(props) {
     if (data && data.EC === 0) {
       toast.success(data.EM);
       handleClose();
+      onUserAdded();
     }
     if (data && data.EC !== 0) {
       toast.error(data.EM);

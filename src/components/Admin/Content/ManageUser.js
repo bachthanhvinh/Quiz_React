@@ -6,6 +6,11 @@ import TableUser from "./TableUsers";
 
 const ManageUser = (props) => {
   const [showModalCreactUser, setShowModalCreactUser] = useState(false);
+  const [isUserAdded, setIsUserAdded] = useState(false);
+
+  const handleUserAdded = () => {
+    setIsUserAdded((prev) => !prev);
+  };
   return (
     <>
       <div className="manageUser-container">
@@ -20,11 +25,12 @@ const ManageUser = (props) => {
             </button>
           </div>
           <div className="table-user-container">
-            <TableUser />
+            <TableUser isUserAdded={isUserAdded} />
           </div>
           <ModalCreateUser
             show={showModalCreactUser}
             setShow={setShowModalCreactUser}
+            onUserAdded={handleUserAdded}
           />
         </div>
       </div>
