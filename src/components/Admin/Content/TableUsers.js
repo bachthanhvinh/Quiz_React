@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getAllUser } from "../../../services/apiServices";
 
 const TableUser = (props) => {
-  const { isUserAdded } = props;
+  const { isUserAdded, handleClickBtnUpdate } = props;
   const [listUsers, setListUsers] = useState([]);
   //componentDidMount
   useEffect(() => {
@@ -38,7 +38,12 @@ const TableUser = (props) => {
                   <td>{item.role}</td>
                   <td>
                     <button className="btn btn-secondary">View</button>
-                    <button className="btn btn-warning mx-3">Update</button>
+                    <button
+                      className="btn btn-warning mx-3"
+                      onClick={() => handleClickBtnUpdate(item)}
+                    >
+                      Update
+                    </button>
                     <button className="btn btn-danger">Delete</button>
                   </td>
                 </tr>

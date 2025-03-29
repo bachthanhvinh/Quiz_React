@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { FcPlus } from "react-icons/fc";
 
-function GridComplexExample(props) {
+function FormUpdateUser(props) {
   const {
     email,
     setEmail,
@@ -19,15 +19,16 @@ function GridComplexExample(props) {
     setImage,
     previewImage,
     setPreviewImage,
+    dataUpdate,
   } = props;
+
   const handleUploadImage = (event) => {
     if (event.target && event.target.files && event.target.files[0]) {
       setPreviewImage(URL.createObjectURL(event.target.files[0]));
       setImage(event.target.files[0]);
     }
-    console.log("upload File", event.target.files[0]);
+    // console.log("upload File", event.target.files[0]);
   };
-
   return (
     <Form>
       <Row className="mb-3">
@@ -37,6 +38,7 @@ function GridComplexExample(props) {
             type="Email"
             placeholder="Enter email"
             value={email}
+            disabled
             onChange={(event) => setEmail(event.target.value)}
           />
         </Form.Group>
@@ -47,6 +49,7 @@ function GridComplexExample(props) {
             type="Password"
             placeholder="Password"
             value={password}
+            disabled
             onChange={(event) => setPassword(event.target.value)}
           />
         </Form.Group>
@@ -95,4 +98,4 @@ function GridComplexExample(props) {
   );
 }
 
-export default GridComplexExample;
+export default FormUpdateUser;

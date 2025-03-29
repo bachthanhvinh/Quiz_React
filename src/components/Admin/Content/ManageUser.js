@@ -3,13 +3,20 @@ import "./ManageUser.scss";
 import { FcPlus } from "react-icons/fc";
 import { useState } from "react";
 import TableUser from "./TableUsers";
+import ModalUpdateUser from "./ModalUpdateUser";
 
 const ManageUser = (props) => {
   const [showModalCreactUser, setShowModalCreactUser] = useState(false);
+  const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
   const [isUserAdded, setIsUserAdded] = useState(false);
-
+  const [dataUpdate, setDataUpdate] = useState({});
   const handleUserAdded = () => {
     setIsUserAdded((prev) => !prev);
+  };
+  const handleClickBtnUpdate = (user) => {
+    setShowModalUpdateUser(true);
+    // console.log(user);
+    setDataUpdate(user);
   };
   return (
     <>
@@ -25,12 +32,20 @@ const ManageUser = (props) => {
             </button>
           </div>
           <div className="table-user-container">
-            <TableUser isUserAdded={isUserAdded} />
+            <TableUser
+              isUserAdded={isUserAdded}
+              handleClickBtnUpdate={handleClickBtnUpdate}
+            />
           </div>
           <ModalCreateUser
             show={showModalCreactUser}
             setShow={setShowModalCreactUser}
             onUserAdded={handleUserAdded}
+          />
+          <ModalUpdateUser
+            show={showModalUpdateUser}
+            setShow={setShowModalUpdateUser}
+            dataUpdate={dataUpdate}
           />
         </div>
       </div>
