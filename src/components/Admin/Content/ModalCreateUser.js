@@ -65,6 +65,7 @@ function ModalCreateUser(props) {
         size="xl"
         backdrop="static"
         className="modal-add-user"
+        centered
       >
         <Modal.Header closeButton>
           <Modal.Title>Add new user</Modal.Title>
