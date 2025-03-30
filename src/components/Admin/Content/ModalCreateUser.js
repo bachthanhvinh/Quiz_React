@@ -12,7 +12,7 @@ function ModalCreateUser(props) {
   const [image, setImage] = useState("");
   const [previewImage, setPreviewImage] = useState("");
 
-  const { show, setShow, onUserAdded } = props;
+  const { show, setShow, onReload } = props;
   // const [show, setShow] = useState(false);
 
   const handleClose = () => {
@@ -47,11 +47,11 @@ function ModalCreateUser(props) {
     }
 
     let data = await postCreateNewUser(email, password, username, role, image);
-    console.log("component res: ", data);
+    // console.log("component res: ", data);
     if (data && data.EC === 0) {
       toast.success(data.EM);
       handleClose();
-      onUserAdded();
+      onReload();
     }
     if (data && data.EC !== 0) {
       toast.error(data.EM);

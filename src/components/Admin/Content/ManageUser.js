@@ -10,13 +10,16 @@ const ManageUser = (props) => {
   const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
   const [isUserAdded, setIsUserAdded] = useState(false);
   const [dataUpdate, setDataUpdate] = useState({});
-  const handleUserAdded = () => {
+  const onReload = () => {
     setIsUserAdded((prev) => !prev);
   };
   const handleClickBtnUpdate = (user) => {
     setShowModalUpdateUser(true);
     // console.log(user);
     setDataUpdate(user);
+  };
+  const resetDataUpdate = () => {
+    setDataUpdate({});
   };
   return (
     <>
@@ -40,12 +43,14 @@ const ManageUser = (props) => {
           <ModalCreateUser
             show={showModalCreactUser}
             setShow={setShowModalCreactUser}
-            onUserAdded={handleUserAdded}
+            onReload={onReload}
           />
           <ModalUpdateUser
             show={showModalUpdateUser}
             setShow={setShowModalUpdateUser}
             dataUpdate={dataUpdate}
+            onReload={onReload}
+            resetDataUpdate={resetDataUpdate}
           />
         </div>
       </div>
