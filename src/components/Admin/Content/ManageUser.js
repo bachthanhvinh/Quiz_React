@@ -82,6 +82,7 @@ const ManageUser = (props) => {
             show={showModalDeleteUser}
             setShow={setShowModalDeleteUser}
             dataDelete={dataDelete}
+            onReload={onReload}
           />
         </div>
       </div>
