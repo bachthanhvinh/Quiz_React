@@ -21,7 +21,7 @@ function ModalDeleteUser(props) {
       toast.error(data.EM);
     }
   };
-  console.log(dataDelete.id);
+  // console.log(dataDelete.id);
   return (
     <>
       {/* <Button variant="primary" onClick={handleShow}>

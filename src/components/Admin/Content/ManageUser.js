@@ -1,11 +1,13 @@
 import ModalCreateUser from "./ModalCreateUser";
 import "./ManageUser.scss";
 import { FcPlus } from "react-icons/fc";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TableUser from "./TableUsers";
 import ModalUpdateUser from "./ModalUpdateUser";
 import ModalViewUser from "./ModalViewUser";
 import ModalDeleteUser from "./ModalDeleteUsesr";
+import TableUserPage from "./TableUserPage";
+import { pagenationUser } from "../../../services/apiServices";
 
 const ManageUser = (props) => {
   const [showModalCreactUser, setShowModalCreactUser] = useState(false);
@@ -16,6 +18,7 @@ const ManageUser = (props) => {
   const [dataUpdate, setDataUpdate] = useState({});
   // const [dataView, setDataView] = useState({});
   const [dataDelete, setDataDelete] = useState({});
+
   const onReload = () => {
     setIsUserAdded((prev) => !prev);
   };
@@ -38,6 +41,7 @@ const ManageUser = (props) => {
     setShowModalDeleteUser(true);
     setDataDelete(user);
   };
+
   return (
     <>
       <div className="manageUser-container">
@@ -52,7 +56,13 @@ const ManageUser = (props) => {
             </button>
           </div>
           <div className="table-user-container">
-            <TableUser
+            {/* <TableUser
+              isUserAdded={isUserAdded}
+              handleClickBtnUpdate={handleClickBtnUpdate}
+              // handleClickBtnView={handleClickBtnView}
+              handleClickBtnDelete={handleClickBtnDelete}
+            /> */}
+            <TableUserPage
               isUserAdded={isUserAdded}
               handleClickBtnUpdate={handleClickBtnUpdate}
               // handleClickBtnView={handleClickBtnView}
