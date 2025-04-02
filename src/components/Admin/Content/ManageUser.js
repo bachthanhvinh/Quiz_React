@@ -16,8 +16,10 @@ const ManageUser = (props) => {
   const [showModalDeleteUser, setShowModalDeleteUser] = useState(false);
   const [isUserAdded, setIsUserAdded] = useState(false);
   const [dataUpdate, setDataUpdate] = useState({});
+
   // const [dataView, setDataView] = useState({});
   const [dataDelete, setDataDelete] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
 
   const onReload = () => {
     setIsUserAdded((prev) => !prev);
@@ -42,9 +44,10 @@ const ManageUser = (props) => {
     setDataDelete(user);
   };
 
+  console.log(currentPage);
   return (
     <>
-      <div className="manageUser-container">
+      <div className="manageUser-container p-2">
         <div className="manageUser-container__title"> Manage User</div>
         <div className="manageUser-container__content">
           <div className="btn-add-new">
@@ -67,12 +70,16 @@ const ManageUser = (props) => {
               handleClickBtnUpdate={handleClickBtnUpdate}
               // handleClickBtnView={handleClickBtnView}
               handleClickBtnDelete={handleClickBtnDelete}
+              setCurrentPage={setCurrentPage}
+              currentPage={currentPage}
             />
           </div>
           <ModalCreateUser
             show={showModalCreactUser}
             setShow={setShowModalCreactUser}
             onReload={onReload}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
           />
           <ModalUpdateUser
             show={showModalUpdateUser}
@@ -80,6 +87,8 @@ const ManageUser = (props) => {
             dataUpdate={dataUpdate}
             onReload={onReload}
             resetDataUpdate={resetDataUpdate}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
           />
           <ModalViewUser
             show={showModalViewUser}
@@ -93,6 +102,8 @@ const ManageUser = (props) => {
             setShow={setShowModalDeleteUser}
             dataDelete={dataDelete}
             onReload={onReload}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
           />
         </div>
       </div>

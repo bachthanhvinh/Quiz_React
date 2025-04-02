@@ -9,18 +9,21 @@ const TableUserPage = (props) => {
     handleClickBtnUpdate,
     handleClickBtnView,
     handleClickBtnDelete,
+    setCurrentPage,
+    currentPage,
   } = props;
   const [listUsers, setListUsers] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   //componentDidMount
   const handlePageClick = (event) => {
+    setCurrentPage(+event.selected + 1);
     fetchPaginationUser(+event.selected + 1);
-    console.log(`User requested page number ${event.selected}`);
+    // console.log(`User requested page number ${event.selected}`);
   };
 
   useEffect(() => {
     // axiosApi();
-    fetchPaginationUser(1);
+    fetchPaginationUser(currentPage);
   }, [isUserAdded]);
   //   const axiosApi = async () => {
   //     const res = await getAllUser();
@@ -37,8 +40,8 @@ const TableUserPage = (props) => {
   };
   return (
     <>
-      <table className="table table-hover table-bordered">
-        <thead className="table-primary text-center">
+      <table className="table table-hover table-bordered  ">
+        <thead className="table-primary text-center  ">
           <tr>
             <th scope="col">No</th>
             <th scope="col">Username</th>
@@ -66,7 +69,9 @@ const TableUserPage = (props) => {
                     </button>
                     <button
                       className="btn btn-warning mx-3"
-                      onClick={() => handleClickBtnUpdate(item)}
+                      onClick={() => {
+                        handleClickBtnUpdate(item);
+                      }}
                     >
                       Update
                     </button>
@@ -107,6 +112,7 @@ const TableUserPage = (props) => {
           containerClassName="pagination"
           activeClassName="active"
           renderOnZeroPageCount={null}
+          forcePage={currentPage - 1}
         />
       </div>
     </>

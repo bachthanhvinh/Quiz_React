@@ -14,16 +14,15 @@ body {
   position: relative;
   .header-container {
     .btn-login {
-      border: 1px solid #6a6a6a;
-      border-radius: 5px;
+      color: black;
       padding: 3px 10px;
       margin-right: 20px;
+      border: none;
       background-color: transparent;
       transition: background-color 0.4s;
       font-size: 18px;
       &:hover {
-        background-color: rgb(30, 30, 30);
-        color: white;
+        color: rebeccapurple;
       }
     }
     .btn-signUp {
@@ -32,11 +31,12 @@ body {
       padding: 7px 15px;
       // margin-right: 20px;
       background-color: rgb(30, 30, 30);
-      transition: background-color 0.4s;
+      transition: background-color, border-radius 0.3s;
       font-size: 18px;
       color: white;
       &:hover {
         background-color: rgb(57, 57, 57);
+        border-radius: 9px;
       }
     }
     position: sticky;

@@ -12,7 +12,7 @@ function ModalCreateUser(props) {
   const [image, setImage] = useState("");
   const [previewImage, setPreviewImage] = useState("");
 
-  const { show, setShow, onReload } = props;
+  const { show, setShow, onReload, setCurrentPage } = props;
   // const [show, setShow] = useState(false);
 
   const handleClose = () => {
@@ -52,6 +52,7 @@ function ModalCreateUser(props) {
       toast.success(data.EM);
       handleClose();
       onReload();
+      setCurrentPage(1);
     }
     if (data && data.EC !== 0) {
       toast.error(data.EM);

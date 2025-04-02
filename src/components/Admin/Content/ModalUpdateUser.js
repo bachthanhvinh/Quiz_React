@@ -6,7 +6,15 @@ import { postCreateNewUser, updateUser } from "../../../services/apiServices";
 import FormUpdateUser from "./FormUpdateUser";
 import _ from "lodash";
 function ModalUpdateUser(props) {
-  const { show, setShow, onReload, dataUpdate, resetDataUpdate } = props;
+  const {
+    show,
+    setShow,
+    onReload,
+    dataUpdate,
+    resetDataUpdate,
+    setCurrentPage,
+    currentPage,
+  } = props;
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
