@@ -1,0 +1,30 @@
+.register-container {
+  .form-content {
+    padding: 20px;
+  }
+  .content-form {
+    .btn-register {
+      width: 100%;
+      background-color: black;
+      color: white;
+      transition: 0.4s;
+      &:hover {
+        background-color: transparent;
+        color: black;
+      }
+    }
+  }
+  .back {
+    cursor: pointer;
+  }
+  .Toggle-password {
+    position: relative;
+  }
+  .isToggle {
+    position: absolute;
+    top: 67%;
+    right: 20px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+}
