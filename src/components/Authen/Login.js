@@ -5,11 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { doLogin } from "../../redux/action/userAction";
+import { ImSpinner2 } from "react-icons/im";
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const [checkDisabled, setCheckDisabled] = useState(false);
   const validateEmail = (email) => {
     return String(email)
       .toLowerCase()
@@ -31,15 +33,18 @@ function Login() {
       toast.error("Invalid password");
       return;
     }
+    setCheckDisabled(true);
 
     const data = await LoginUser(email, password);
     if (data && data.EC === 0) {
       toast.success(data.EM);
-      navigate("/");
       dispatch(doLogin(data));
+      setCheckDisabled(false);
+      navigate("/");
     }
     if (data && data.EC !== 0) {
       toast.error(data.EM);
+      setCheckDisabled(false);
     }
   };
   const handleSignup = () => {
@@ -95,7 +100,11 @@ function Login() {
                 <button
                   className="btn-loginUser btn mt-3 "
                   onClick={(e) => handleLogin(e)}
+                  disabled={checkDisabled}
                 >
+                  {checkDisabled === true && (
+                    <ImSpinner2 className="loaderIcon" />
+                  )}
                   Log in to Quiz
                 </button>
               </div>
