@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { getQuizUser } from "../../services/apiServices";
 import { useSelector } from "react-redux";
 import "./ListQuiz.scss";
+import { useNavigate } from "react-router-dom";
 function ListQuiz() {
   const [dataQuiz, setDataQuiz] = useState([]);
+  const Nagivate = useNavigate();
 
   useEffect(() => {
     // const res = await getQuizUser();
-
     getQuiz();
   }, []);
 
@@ -18,27 +19,39 @@ function ListQuiz() {
   console.log(dataQuiz);
   return (
     <div className="container d-flex  justify-content-between card-item">
-      {dataQuiz.map((quiz, index) => {
-        return (
-          <div key={`${quiz.id}-card`} className="mt-5">
-            <div className="card cart-quiz-item  " style={{ width: "18rem" }}>
-              <img
-                className="card-img-top card-img-item"
-                src={`data:image/png;base64,${quiz.image}`}
-                alt="Card image cap"
-              />
-              <div className="card-body  ">
-                <h5 className="card-title">Quiz {index + 1}</h5>
-                <p className="card-text">{quiz.description}</p>
+      {dataQuiz && dataQuiz.length > 0 ? (
+        <>
+          {dataQuiz.map((quiz, index) => {
+            return (
+              <div key={`${quiz.id}-card`} className="mt-5">
+                <div
+                  className="card cart-quiz-item  "
+                  style={{ width: "18rem" }}
+                >
+                  <img
+                    className="card-img-top card-img-item"
+                    src={`data:image/png;base64,${quiz.image}`}
+                    alt="Card image cap"
+                  />
+                  <div className="card-body  ">
+                    <h5 className="card-title">Quiz {index + 1}</h5>
+                    <p className="card-text">{quiz.description}</p>
 
-                <a href="#" className="btn btn-primary  ">
-                  Go Quiz now
-                </a>
+                    <a
+                      className="btn btn-primary  "
+                      onClick={() => Nagivate(`/quiz/${quiz.id}`)}
+                    >
+                      Go Quiz now
+                    </a>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        );
-      })}
+            );
+          })}
+        </>
+      ) : (
+        <div>You're don't have any quiz now</div>
+      )}
     </div>
   );
 }

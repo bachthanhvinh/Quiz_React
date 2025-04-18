@@ -10,6 +10,8 @@ import "react-toastify/dist/ReactToastify.css";
 import Login from "./components/Authen/Login";
 import Register from "./components/Authen/Register";
 import ListQuiz from "./components/User/ListQuiz";
+import DetaiQuiz from "./components/User/DetailQuiz";
+import Error404 from "./components/Error404";
 function Layout() {
   return (
     <>
@@ -18,12 +20,17 @@ function Layout() {
           <Route index element={<HomePage />} />
           <Route path="users" element={<ListQuiz />} />
         </Route>
+
+        <Route path="/quiz/:id" element={<DetaiQuiz />} />
+
         <Route path="admin" element={<Admin />}>
           <Route index element={<DashBoard />} />
           <Route path="manage-users" element={<ManageUser />} />
         </Route>
+
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
+        <Route path="*" element={<Error404 />} />
       </Routes>
       <ToastContainer
         position="top-right"

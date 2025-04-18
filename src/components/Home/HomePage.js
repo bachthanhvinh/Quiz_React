@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 const HomePage = (props) => {
   const navigate = useNavigate();
   const isLogin = useSelector((state) => state.user.isAuthenticated);
-  console.log(isLogin);
   return (
     <>
       <div className="homepage-container">

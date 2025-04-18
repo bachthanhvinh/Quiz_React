@@ -4,6 +4,8 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import logo from "../../assets/logo192.png";
+import "./Header.scss";
 const Header = () => {
   // const account = useSelector((state) => state.user.account);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
@@ -19,7 +21,7 @@ const Header = () => {
     <Navbar expand="lg" bg="light">
       <Container>
         <NavLink to="/" className="navbar-brand">
-          Logo
+          <img className="logo-header" src={`${logo}`} alt="Logo" />
         </NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
