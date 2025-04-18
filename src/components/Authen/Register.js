@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./Register.scss";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IoIosEye, IoIosEyeOff, oIosEye } from "react-icons/io";
 import { RegisterUser } from "../../services/apiServices";
 import { toast } from "react-toastify";
@@ -10,6 +10,11 @@ function Register() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const checkuref = useRef(null);
+
+  useEffect(() => {
+    checkuref.current.focus();
+  }, []);
 
   const validateEmail = (email) => {
     return String(email)
@@ -116,6 +121,7 @@ function Register() {
                   //   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  ref={checkuref}
                 />
               </div>
               <div className="form-group  Toggle-password">

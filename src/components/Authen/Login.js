@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./Login.scss";
 import { LoginUser } from "../../services/apiServices";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,11 @@ function Login() {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const [checkDisabled, setCheckDisabled] = useState(false);
+  const checkuref = useRef(null);
+
+  useEffect(() => {
+    checkuref.current.focus();
+  }, []);
   const validateEmail = (email) => {
     return String(email)
       .toLowerCase()
@@ -80,6 +85,7 @@ function Login() {
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
                   autoComplete="current-password"
+                  ref={checkuref}
                 />
               </div>
               <div className="form-group">
