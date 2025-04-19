@@ -39,7 +39,11 @@ function ListQuiz() {
 
                     <a
                       className="btn btn-primary  "
-                      onClick={() => Nagivate(`/quiz/${quiz.id}`)}
+                      onClick={() =>
+                        Nagivate(`/quiz/${quiz.id}`, {
+                          state: { titleQuiz: quiz.description },
+                        })
+                      }
                     >
                       Go Quiz now
                     </a>
