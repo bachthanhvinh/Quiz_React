@@ -16,7 +16,7 @@ function ListQuiz() {
     const res = await getQuizUser();
     setDataQuiz(res.DT);
   };
-  console.log(dataQuiz);
+  // console.log(dataQuiz);
   return (
     <div className="container d-flex  justify-content-between card-item">
       {dataQuiz && dataQuiz.length > 0 ? (
@@ -41,7 +41,7 @@ function ListQuiz() {
                       className="btn btn-primary  "
                       onClick={() =>
                         Nagivate(`/quiz/${quiz.id}`, {
-                          state: { titleQuiz: quiz.description },
+                          state: { titleQuiz: quiz.description, id: quiz.id },
                         })
                       }
                     >
