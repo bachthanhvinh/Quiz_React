@@ -1,43 +1,51 @@
 import _ from "lodash";
 
 function Question(prop) {
-  const { data, index } = prop;
+  const { data, index, handleClickCheck } = prop;
   if (_.isEmpty(data)) {
     return <></>;
   }
-  // console.log(data);
+  const handleClickRadio = (questionId, answerId) => {
+    // console.log(questionId, answerId);
+    handleClickCheck(questionId, answerId);
+  };
   return (
     <>
       <div className="detail-Quiz_bodyQuestion">
         <div className="text-center my-3">
-          {data && data.image && (
+          {data && data.image ? (
             <img
-              className="image_Quiz"
+              className="image_Quiz  mt-3"
               src={`data:image/jpg;base64,${data.image}`}
               alt="image-question"
             />
+          ) : (
+            <div className="image_nothing  mt-3">{`(Không có ảnh)`}</div>
           )}
+          <h4 className="question mt-2">
+            Question {index + 1} : {data && data.description} ?
+          </h4>
         </div>
-        <h4 className="question">
-          Question {index + 1} : {data && data.description} ?
-        </h4>
         <div className="answerss">
           {data &&
             data.answers &&
             data.answers.map((a, index) => {
+              // console.log(a.isSelected);
               return (
                 <div key={`answers-${index}`} className="form-check">
                   <input
                     className="form-check-input"
                     type="checkbox"
-                    value=""
-                    id="flexCheckDefault"
+                    // value=""
+                    checked={a.isSelected && a.isSelected}
+                    id={`flexCheckDefault-${index}`}
+                    onChange={() => handleClickRadio(data.questionId, a.id)}
                   />
                   <label
                     className="form-check-label"
-                    htmlFor="flexCheckDefault"
+                    htmlFor={`flexCheckDefault-${index}`}
                   >
-                    <div className="a-child">{a}</div>
+                    <div className="a-child">{a.description}</div>
                   </label>
                 </div>
               );

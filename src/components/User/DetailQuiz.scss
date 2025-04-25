@@ -10,10 +10,16 @@
       list-style: none;
     }
     .image_Quiz {
-      height: 400px;
+      height: 350px;
       width: 600px;
       object-fit: cover;
       border-radius: 10px;
+    }
+    .image_nothing {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 350px;
     }
   }
   &_countDown {
