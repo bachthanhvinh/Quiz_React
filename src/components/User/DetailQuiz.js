@@ -44,12 +44,32 @@ function DetaiQuiz() {
       dataQClone[index] = question;
       setDataQ(dataQClone);
     }
-
-    // setDataQ(dataQClone);
-    console.log(index);
-    console.log(question.answers);
   };
+  const handleFinish = () => {
+    const payLoad = {
+      quizId: +quizId,
+      answers: [],
+    };
+    let answers = [];
+    if (dataQ && dataQ.length > 0) {
+      dataQ.forEach((question) => {
+        let questionId = question.questionId;
+        let userAnswers = [];
 
+        question.answers.forEach((a) => {
+          if (a.isSelected === true) {
+            userAnswers.push(a.id);
+          }
+        });
+        answers.push({
+          questionId,
+          userAnswers,
+        });
+      });
+    }
+    payLoad.answers = answers;
+    console.log(payLoad);
+  };
   const fetchdataQuiz = async () => {
     const res = await getDataQuestion(quizId);
     let raw = res.DT;
@@ -117,7 +137,10 @@ function DetaiQuiz() {
               >
                 Next
               </button>
-              <button className="btn btn-success" onClick={() => handleNext()}>
+              <button
+                className="btn btn-success"
+                onClick={() => handleFinish()}
+              >
                 Finish
               </button>
             </div>
