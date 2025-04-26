@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { getDataQuestion } from "../../services/apiServices";
+import { getDataQuestion, postFinishResult } from "../../services/apiServices";
 import _ from "lodash";
 import "./DetailQuiz.scss";
 import Question from "./Question";
+import ModalQuizUser from "./ModalQuizUser";
 function DetaiQuiz() {
   const param = useParams();
   const quizId = param.id;
@@ -11,6 +12,8 @@ function DetaiQuiz() {
 
   const [dataQ, setDataQ] = useState([]);
   const [index, setIndex] = useState(0);
+  const [checkShowModal, setCheckShowModal] = useState(false);
+  const [dataAnswers, setDataAnswers] = useState({});
 
   const handleNext = () => {
     if (dataQ && dataQ.length > index + 1) setIndex(index + 1);
@@ -45,8 +48,8 @@ function DetaiQuiz() {
       setDataQ(dataQClone);
     }
   };
-  const handleFinish = () => {
-    const payLoad = {
+  const handleFinish = async () => {
+    let payLoad = {
       quizId: +quizId,
       answers: [],
     };
@@ -54,22 +57,37 @@ function DetaiQuiz() {
     if (dataQ && dataQ.length > 0) {
       dataQ.forEach((question) => {
         let questionId = question.questionId;
-        let userAnswers = [];
+        let userAnswerId = [];
 
         question.answers.forEach((a) => {
           if (a.isSelected === true) {
-            userAnswers.push(a.id);
+            userAnswerId.push(a.id);
           }
         });
         answers.push({
-          questionId,
-          userAnswers,
+          questionId: +questionId,
+          userAnswerId: userAnswerId,
         });
       });
     }
     payLoad.answers = answers;
-    console.log(payLoad);
+    // console.log(payLoad);
+
+    let res = await postFinishResult(payLoad);
+    // console.log(" >>> Check", res);
+    if (res && res.EC === 0) {
+      setCheckShowModal(true);
+      setDataAnswers({
+        countCorrect: res.DT.countCorrect,
+        countTotal: res.DT.countTotal,
+        quizData: res.DT.quizData,
+      });
+    }
+    if (res && res.EC !== 0) {
+      console.log("error");
+    }
   };
+
   const fetchdataQuiz = async () => {
     const res = await getDataQuestion(quizId);
     let raw = res.DT;
@@ -138,7 +156,7 @@ function DetaiQuiz() {
                 Next
               </button>
               <button
-                className="btn btn-success"
+                className="btn btn-warning"
                 onClick={() => handleFinish()}
               >
                 Finish
@@ -148,6 +166,11 @@ function DetaiQuiz() {
           <div className="detail-Quiz_countDown">CountDown</div>
         </div>
       </div>
+      <ModalQuizUser
+        show={checkShowModal}
+        setShow={setCheckShowModal}
+        dataAnswers={dataAnswers}
+      />
     </>
   );
 }
