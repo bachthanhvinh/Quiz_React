@@ -19,8 +19,9 @@ import {
   FaReact,
 } from "react-icons/fa";
 import sidebarBg from "../../assets/bg2.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const SideBar = (props) => {
+  const navigate = useNavigate();
   const { image, collapsed, toggled, handleToggleSidebar } = props;
   return (
     <>
@@ -45,7 +46,10 @@ const SideBar = (props) => {
             }}
           >
             <FaReact size={"2em"} color="rgb(0 255 255)" />
-            <span> Quiz</span>
+            <span className="logo-sidebar" onClick={() => navigate("/")}>
+              {" "}
+              Quiz
+            </span>
           </div>
         </SidebarHeader>
 
@@ -66,7 +70,11 @@ const SideBar = (props) => {
                 Quản lý Users
                 <Link to="/admin/manage-users" />
               </MenuItem>
-              <MenuItem> Quản lý Bài Quiz</MenuItem>
+              <MenuItem>
+                {" "}
+                Quản lý Bài Quiz
+                <Link to="/admin/manage-quizzes" />
+              </MenuItem>
               <MenuItem> Quản lý Câu Hỏi</MenuItem>
             </SubMenu>
             {/* <SubMenu

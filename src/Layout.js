@@ -12,6 +12,8 @@ import Register from "./components/Authen/Register";
 import ListQuiz from "./components/User/ListQuiz";
 import DetaiQuiz from "./components/User/DetailQuiz";
 import Error404 from "./components/Error404";
+import ManageQuiz from "./components/Admin/Content/ManageQuiz/ManageQuiz";
+
 function Layout() {
   return (
     <>
@@ -26,6 +28,7 @@ function Layout() {
         <Route path="admin" element={<Admin />}>
           <Route index element={<DashBoard />} />
           <Route path="manage-users" element={<ManageUser />} />
+          <Route path="manage-quizzes" element={<ManageQuiz />} />
         </Route>
 
         <Route path="login" element={<Login />} />
