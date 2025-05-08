@@ -58,7 +58,7 @@ function FormCreateQuiz(props) {
           >
             <option value="EASY">EASY</option>
             <option value="MEDIUM">MEDIUM</option>
-            <option value="DIFFICULT">HARD</option>
+            <option value="HARD">HARD</option>
           </Form.Select>
         </Form.Group>
       </Row>
@@ -76,7 +76,7 @@ function FormCreateQuiz(props) {
         </Form.Group>
         <div className="col-md-12 img-preview">
           {previewImage ? (
-            <img src={previewImage} />
+            <img  src={previewImage} />
           ) : (
             <span>Preview Image</span>
           )}

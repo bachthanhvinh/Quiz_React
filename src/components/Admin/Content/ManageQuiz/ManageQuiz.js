@@ -2,9 +2,11 @@ import { useState } from "react";
 import { FcPlus } from "react-icons/fc";
 import ModalCreateQuiz from "./ModalCreateQuiz";
 import "./ManageQuiz.scss";
+import TableQuizzes from "./TableQuizzes";
 function ManageQuiz(props) {
   const [showModalCreactQuiz, setShowModalCreactQuiz] = useState(false);
   const [isCreateQuiz, setIscreateQuiz] = useState(false);
+
   const onReload = () => {
     setIscreateQuiz((prev) => !prev);
   };
@@ -13,7 +15,7 @@ function ManageQuiz(props) {
       <div className="manageQuiz-container p-2">
         <div className="manageQuiz-container__title"> Manage Quiz</div>
         <div className="manageQuiz-container__content">
-          <div className="btn-add-new">
+          <div className="btn-add-new-quiz">
             <button
               className=" button-add"
               onClick={() => setShowModalCreactQuiz(true)}
@@ -22,14 +24,14 @@ function ManageQuiz(props) {
             </button>
           </div>
           <div className="table-Quiz-container">
-            {/* <TableQuizPage
-              isQuizAdded={isQuizAdded}
-              handleClickBtnUpdate={handleClickBtnUpdate}
+            <TableQuizzes
+              isCreateQuiz={isCreateQuiz}
+              // handleClickBtnUpdate={handleClickBtnUpdate}
               // handleClickBtnView={handleClickBtnView}
-              handleClickBtnDelete={handleClickBtnDelete}
-              setCurrentPage={setCurrentPage}
-              currentPage={currentPage}
-            /> */}
+              // handleClickBtnDelete={handleClickBtnDelete}
+              // setCurrentPage={setCurrentPage}
+              // currentPage={currentPage}
+            />
           </div>
           <ModalCreateQuiz
             show={showModalCreactQuiz}

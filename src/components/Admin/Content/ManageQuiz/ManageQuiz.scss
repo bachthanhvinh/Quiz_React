@@ -34,12 +34,20 @@
     background-color: #f4f4f4;
   }
 }
-.img-preview {
-  margin-top: 10px;
-  padding: 60px 0;
-  border: 2px dashed #c0c0c0;
-  border-radius: 7px;
-  display: flex;
-  justify-content: center;
-  color: #c0c0c0;
+.btn-add-new-quiz {
+  margin: 15px 0;
+}
+.modal-add-Quiz {
+  .img-preview {
+    margin-top: 10px;
+    padding: 60px 0;
+    border: 2px dashed #c0c0c0;
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    color: #c0c0c0;
+    img {
+      height: 300px;
+    }
+  }
 }

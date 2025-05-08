@@ -2,8 +2,8 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { Bounce, toast } from "react-toastify";
-// import { postCreateNewQuiz } from "../../../services/apiServices";
 import FormCreateQuiz from "./FormCreateQuiz";
+import { postCreateQuiz } from "../../../../services/apiServices";
 function ModalCreateQuiz(props) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -12,7 +12,6 @@ function ModalCreateQuiz(props) {
   const [previewImage, setPreviewImage] = useState("");
 
   const { show, setShow, onReload, setCurrentPage } = props;
-  // const [show, setShow] = useState(false);
 
   const handleClose = () => {
     setShow(false);
@@ -22,38 +21,35 @@ function ModalCreateQuiz(props) {
     setImage("");
     setPreviewImage("");
   };
-  // const handleShow = () => setShow(true);
 
-  //   const validateEmail = (email) => {
-  //     return String(email)
-  //       .toLowerCase()
-  //       .match(
-  //         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  //       );
-  //   };
+  // const validateEmail = (email) => {
+  //   return String(email)
+  //     .toLowerCase()
+  //     .match(
+  //       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  //     );
+  // };
   const handSubmitCreactQuiz = async () => {
-    //   // validate;
-    //   const isValidateEmail = validateEmail(email);
-    //   if (!isValidateEmail) {
-    //     toast.error("Invalid Email !");
-    //     return;
-    //   }
-    //   if (!password) {
-    //     toast.error("Invalid password");
-    //     return;
-    //   }
-    //   let data = await postCreateNewQuiz(email, password, Quizname, role, image);
-    //   // console.log("component res: ", data);
-    //   if (data && data.EC === 0) {
-    //     toast.success(data.EM);
-    //     handleClose();
-    //     onReload();
-    //     setCurrentPage(1);
-    //   }
-    //   if (data && data.EC !== 0) {
-    //     toast.error(data.EM);
-    //   }
-    console.log(name, description, quizType);
+    // validate;
+    // const isValidateEmail = validateEmail(name);
+    // if (!isValidateEmail) {
+    //   toast.error("Invalid Email !");
+    //   return;
+    // }
+    // if (!password) {
+    //   toast.error("Invalid password");
+    //   return;
+    // }
+    let res = await postCreateQuiz(name, description, quizType, image);
+
+    console.log(res);
+    if (res && res.EC === 0) {
+      toast.success(res.EM);
+      onReload();
+      handleClose();
+    } else {
+      toast.error(res.EM);
+    }
   };
   return (
     <>
