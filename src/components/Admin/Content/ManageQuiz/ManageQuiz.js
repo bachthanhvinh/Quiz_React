@@ -3,12 +3,38 @@ import { FcPlus } from "react-icons/fc";
 import ModalCreateQuiz from "./ModalCreateQuiz";
 import "./ManageQuiz.scss";
 import TableQuizzes from "./TableQuizzes";
+import ModalUpdateQuiz from "./ModalUpdateQuiz";
+import ModalViewQuiz from "./ModalViewQuiz";
+import ModalDeleteQuiz from "./ModalDeleteQuiz";
 function ManageQuiz(props) {
   const [showModalCreactQuiz, setShowModalCreactQuiz] = useState(false);
   const [isCreateQuiz, setIscreateQuiz] = useState(false);
+  const [showModalUpdateQuiz, setShowModalUpdateQuiz] = useState(false);
+  const [showModalDeleteQuiz, setShowModalDeleteQuiz] = useState(false);
+  const [showModalViewQuiz, setShowModalViewQuiz] = useState(false);
 
+  const [dataModal, setDataModal] = useState({});
   const onReload = () => {
     setIscreateQuiz((prev) => !prev);
+  };
+
+  const handleClickBtnDelete = (quiz) => {
+    setShowModalDeleteQuiz(true);
+    setDataModal(quiz);
+  };
+  const handleClickBtnUpdate = (quiz) => {
+    setShowModalUpdateQuiz(true);
+
+    // console.log(quiz);
+    setDataModal(quiz);
+  };
+  const handleClickBtnView = (quiz) => {
+    setShowModalViewQuiz(true);
+    setDataModal(quiz);
+  };
+
+  const resetDataModal = () => {
+    setDataModal({});
   };
   return (
     <>
@@ -26,9 +52,9 @@ function ManageQuiz(props) {
           <div className="table-Quiz-container">
             <TableQuizzes
               isCreateQuiz={isCreateQuiz}
-              // handleClickBtnUpdate={handleClickBtnUpdate}
-              // handleClickBtnView={handleClickBtnView}
-              // handleClickBtnDelete={handleClickBtnDelete}
+              handleClickBtnUpdate={handleClickBtnUpdate}
+              handleClickBtnView={handleClickBtnView}
+              handleClickBtnDelete={handleClickBtnDelete}
               // setCurrentPage={setCurrentPage}
               // currentPage={currentPage}
             />
@@ -40,30 +66,30 @@ function ManageQuiz(props) {
             // setCurrentPage={setCurrentPage}
             // currentPage={currentPage}
           />
-          {/* <ModalUpdateQuiz
+          <ModalUpdateQuiz
             show={showModalUpdateQuiz}
             setShow={setShowModalUpdateQuiz}
-            dataUpdate={dataUpdate}
+            dataModal={dataModal}
             onReload={onReload}
-            resetDataUpdate={resetDataUpdate}
-            setCurrentPage={setCurrentPage}
-            currentPage={currentPage}
+            resetDataModal={resetDataModal}
+            // setCurrentPage={setCurrentPage}
+            // currentPage={currentPage}
           />
           <ModalViewQuiz
             show={showModalViewQuiz}
             setShow={setShowModalViewQuiz}
-            dataView={dataUpdate}
+            dataModal={dataModal}
             // onReload={onReload}
-            resetDataView={resetDataUpdate}
+            resetDataModal={resetDataModal}
           />
           <ModalDeleteQuiz
             show={showModalDeleteQuiz}
             setShow={setShowModalDeleteQuiz}
-            dataDelete={dataDelete}
+            dataDelete={dataModal}
             onReload={onReload}
-            setCurrentPage={setCurrentPage}
-            currentPage={currentPage}
-          /> */}
+            // setCurrentPage={setCurrentPage}
+            // currentPage={currentPage}
+          />
         </div>
       </div>
     </>

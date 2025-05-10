@@ -12,11 +12,13 @@
       border: 1px solid green;
     }
     .admin-main {
+      height: calc(100vh - 40px);
       // border: 1px solid red;
     }
   }
 }
 * {
+  // overflow: hidden;
   margin: 0;
   padding: 0;
   box-sizing: border-box;

@@ -17,7 +17,7 @@ const ManageUser = (props) => {
   const [isUserAdded, setIsUserAdded] = useState(false);
   const [dataUpdate, setDataUpdate] = useState({});
 
-  // const [dataView, setDataView] = useState({});
+  const [dataView, setDataView] = useState({});
   const [dataDelete, setDataDelete] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -29,16 +29,16 @@ const ManageUser = (props) => {
     // console.log(user);
     setDataUpdate(user);
   };
-  // const handleClickBtnView = (user) => {
-  //   setShowModalViewUser(true);
-  //   setDataView(user);
-  // };
+  const handleClickBtnView = (user) => {
+    setShowModalViewUser(true);
+    setDataView(user);
+  };
   const resetDataUpdate = (user) => {
     setDataUpdate({});
   };
-  // const resetDataView = () => {
-  //   setDataView({});
-  // };
+  const resetDataView = () => {
+    setDataView({});
+  };
   const handleClickBtnDelete = (user) => {
     setShowModalDeleteUser(true);
     setDataDelete(user);
@@ -68,7 +68,7 @@ const ManageUser = (props) => {
             <TableUserPage
               isUserAdded={isUserAdded}
               handleClickBtnUpdate={handleClickBtnUpdate}
-              // handleClickBtnView={handleClickBtnView}
+              handleClickBtnView={handleClickBtnView}
               handleClickBtnDelete={handleClickBtnDelete}
               setCurrentPage={setCurrentPage}
               currentPage={currentPage}
@@ -93,9 +93,9 @@ const ManageUser = (props) => {
           <ModalViewUser
             show={showModalViewUser}
             setShow={setShowModalViewUser}
-            dataView={dataUpdate}
+            dataView={dataView}
             // onReload={onReload}
-            resetDataView={resetDataUpdate}
+            resetDataView={resetDataView}
           />
           <ModalDeleteUser
             show={showModalDeleteUser}

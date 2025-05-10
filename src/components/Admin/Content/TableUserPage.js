@@ -63,7 +63,7 @@ const TableUserPage = (props) => {
                   <td>
                     <button
                       className="btn btn-secondary"
-                      onClick={() => handleClickBtnUpdate(item)}
+                      onClick={() => handleClickBtnView(item)}
                     >
                       View
                     </button>
@@ -93,27 +93,29 @@ const TableUserPage = (props) => {
         </tbody>
       </table>
       <div className="d-flex justify-content-center mt-5">
-        <ReactPaginate
-          nextLabel="Next >"
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={3}
-          marginPagesDisplayed={2}
-          pageCount={pageCount}
-          previousLabel="< Previous"
-          pageClassName="page-item"
-          pageLinkClassName="page-link"
-          previousClassName="page-item"
-          previousLinkClassName="page-link"
-          nextClassName="page-item"
-          nextLinkClassName="page-link"
-          breakLabel="..."
-          breakClassName="page-item"
-          breakLinkClassName="page-link"
-          containerClassName="pagination"
-          activeClassName="active"
-          renderOnZeroPageCount={null}
-          forcePage={currentPage - 1}
-        />
+        {pageCount > 0 && (
+          <ReactPaginate
+            nextLabel="Next >"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={2}
+            pageCount={pageCount}
+            previousLabel="< Previous"
+            pageClassName="page-item"
+            pageLinkClassName="page-link"
+            previousClassName="page-item"
+            previousLinkClassName="page-link"
+            nextClassName="page-item"
+            nextLinkClassName="page-link"
+            breakLabel="..."
+            breakClassName="page-item"
+            breakLinkClassName="page-link"
+            containerClassName="pagination"
+            activeClassName="active"
+            renderOnZeroPageCount={null}
+            forcePage={Math.min(currentPage - 1, pageCount - 1)}
+          />
+        )}
       </div>
     </>
   );
