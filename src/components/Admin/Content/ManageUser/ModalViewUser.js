@@ -2,19 +2,11 @@ import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { Bounce, toast } from "react-toastify";
-import { postCreateNewUser, updateUser } from "../../../services/apiServices";
-import FormUpdateUser from "./FormUpdateUser";
 import _ from "lodash";
-function ModalUpdateUser(props) {
-  const {
-    show,
-    setShow,
-    onReload,
-    dataUpdate,
-    resetDataUpdate,
-    setCurrentPage,
-    currentPage,
-  } = props;
+import FormViewUser from "./FormViewUser";
+
+function ModalViewUser(props) {
+  const { show, setShow, onReload, dataView, resetDataView } = props;
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,17 +19,17 @@ function ModalUpdateUser(props) {
 
   useEffect(() => {
     // console.log("render");
-    if (!_.isEmpty(dataUpdate)) {
+    if (!_.isEmpty(dataView)) {
       //update state
-      setEmail(dataUpdate.email);
-      setUsername(dataUpdate.username);
-      setRole(dataUpdate.role);
+      setEmail(dataView.email);
+      setUsername(dataView.username);
+      setRole(dataView.role);
       setImage("");
-      if (dataUpdate.image) {
-        setPreviewImage(`data:image/jpeg;base64,${dataUpdate.image}`);
+      if (dataView.image) {
+        setPreviewImage(`data:image/jpeg;base64,${dataView.image}`);
       }
     }
-  }, [dataUpdate]);
+  }, [dataView]);
   const handleClose = () => {
     setShow(false);
     setEmail("");
@@ -46,7 +38,7 @@ function ModalUpdateUser(props) {
     setRole("USER");
     setImage("");
     setPreviewImage("");
-    resetDataUpdate();
+    resetDataView();
   };
 
   // const handleShow = () => setShow(true);
@@ -58,28 +50,28 @@ function ModalUpdateUser(props) {
   //       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   //     );
   // };
-  const handSubmitUpdateUser = async () => {
-    // validate;
-    // const isValidateEmail = validateEmail(email);
-    // if (!isValidateEmail) {
-    //   toast.error("Invalid Email !");
+  //   const handSubmitUpdateUser = async () => {
+  //     // validate;
+  //     // const isValidateEmail = validateEmail(email);
+  //     // if (!isValidateEmail) {
+  //     //   toast.error("Invalid Email !");
 
-    //   return;
-    // }
+  //     //   return;
+  //     // }
 
-    let data = await updateUser(dataUpdate.id, username, role, image);
-    // console.log("component res: ", data);
+  //     let data = await updateUser(dataView.id, username, role, image);
+  //     // console.log("component res: ", data);
 
-    if (data && data.EC === 0) {
-      toast.success(data.EM);
-      handleClose();
-      onReload();
-    }
-    if (data && data.EC !== 0) {
-      toast.error(data.EM);
-    }
-  };
-  // console.log("check render: dataUpate", dataUpdate.id);
+  //     if (data && data.EC === 0) {
+  //       toast.success(data.EM);
+  //       handleClose();
+  //       onReload();
+  //     }
+  //     if (data && data.EC !== 0) {
+  //       toast.error(data.EM);
+  //     }
+  //   };
+  //   console.log("check render: dataUpate", dataView);
 
   return (
     <>
@@ -88,14 +80,14 @@ function ModalUpdateUser(props) {
         onHide={handleClose}
         size="xl"
         backdrop="static"
-        className="modal-add-user"
+        className="modal-add-user "
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title>Update a user</Modal.Title>
+          <Modal.Title>View User</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <FormUpdateUser
+          <FormViewUser
             email={email}
             setEmail={setEmail}
             password={password}
@@ -108,19 +100,19 @@ function ModalUpdateUser(props) {
             setImage={setImage}
             previewImage={previewImage}
             setPreviewImage={setPreviewImage}
-            // dataUpdate={dataUpdate}
+            // dataView={dataView}
           />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={() => handSubmitUpdateUser()}>
+          {/* <Button variant="primary" onClick={() => handSubmitUpdateUser()}>
             Save
-          </Button>
+          </Button> */}
         </Modal.Footer>
       </Modal>
     </>
   );
 }
-export default ModalUpdateUser;
+export default ModalViewUser;

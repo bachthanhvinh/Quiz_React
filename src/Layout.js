@@ -2,7 +2,6 @@ import App from "./App";
 import User from "./components/User/User";
 import Admin from "./components/Admin/Admin";
 import HomePage from "./components/Home/HomePage";
-import ManageUser from "./components/Admin/Content/ManageUser";
 import DashBoard from "./components/Admin/Content/DashBoard";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Bounce, ToastContainer, toast } from "react-toastify";
@@ -13,6 +12,7 @@ import ListQuiz from "./components/User/ListQuiz";
 import DetaiQuiz from "./components/User/DetailQuiz";
 import Error404 from "./components/Error404";
 import ManageQuiz from "./components/Admin/Content/ManageQuiz/ManageQuiz";
+import ManageUser from "./components/Admin/Content/ManageUser/ManageUser";
 
 function Layout() {
   return (

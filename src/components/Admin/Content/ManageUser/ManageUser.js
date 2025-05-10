@@ -3,11 +3,11 @@ import "./ManageUser.scss";
 import { FcPlus } from "react-icons/fc";
 import { useEffect, useState } from "react";
 import TableUser from "./TableUsers";
+import { pagenationUser } from "../../../../services/apiServices";
 import ModalUpdateUser from "./ModalUpdateUser";
-import ModalViewUser from "./ModalViewUser";
 import ModalDeleteUser from "./ModalDeleteUsesr";
 import TableUserPage from "./TableUserPage";
-import { pagenationUser } from "../../../services/apiServices";
+import ModalViewUser from "./ModalViewUser";
 
 const ManageUser = (props) => {
   const [showModalCreactUser, setShowModalCreactUser] = useState(false);

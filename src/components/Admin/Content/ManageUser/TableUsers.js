@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllUser } from "../../../services/apiServices";
+import { getAllUser } from "../../../../services/apiServices";
 
 const TableUser = (props) => {
   const {
