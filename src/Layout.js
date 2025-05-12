@@ -13,6 +13,7 @@ import DetaiQuiz from "./components/User/DetailQuiz";
 import Error404 from "./components/Error404";
 import ManageQuiz from "./components/Admin/Content/ManageQuiz/ManageQuiz";
 import ManageUser from "./components/Admin/Content/ManageUser/ManageUser";
+import ManageQuestion from "./components/Admin/Content/ManageQuestions/ManageQuestions";
 
 function Layout() {
   return (
@@ -29,6 +30,7 @@ function Layout() {
           <Route index element={<DashBoard />} />
           <Route path="manage-users" element={<ManageUser />} />
           <Route path="manage-quizzes" element={<ManageQuiz />} />
+          <Route path="manage-questions" element={<ManageQuestion />} />
         </Route>
 
         <Route path="login" element={<Login />} />

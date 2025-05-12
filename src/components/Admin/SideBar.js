@@ -19,10 +19,11 @@ import {
   FaReact,
 } from "react-icons/fa";
 import sidebarBg from "../../assets/bg2.jpg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 const SideBar = (props) => {
   const navigate = useNavigate();
   const { image, collapsed, toggled, handleToggleSidebar } = props;
+
   return (
     <>
       <ProSidebar
@@ -57,25 +58,41 @@ const SideBar = (props) => {
           <Menu iconShape="circle">
             <MenuItem
               icon={<FaTachometerAlt />}
+
               // suffix={<span className="badge red">New</span>}
             >
-              Dashboard
-              <Link to="/admin" />
+              <NavLink to="/admin">Dashboard</NavLink>
             </MenuItem>
+
             {/* <MenuItem icon={<FaGem />}>Components</MenuItem> */}
           </Menu>
           <Menu iconShape="circle">
             <SubMenu icon={<FaGem />} title={"Features"}>
               <MenuItem>
-                Quản lý Users
-                <Link to="/admin/manage-users" />
+                <NavLink
+                  to="/admin/manage-users"
+                  className={({ isActive }) => (isActive ? "active_menu" : "")}
+                >
+                  Quản lý Users
+                </NavLink>
+              </MenuItem>
+
+              <MenuItem>
+                <NavLink
+                  to="/admin/manage-quizzes"
+                  className={({ isActive }) => (isActive ? "active_menu" : "")}
+                >
+                  Quản lý Bài Quiz
+                </NavLink>
               </MenuItem>
               <MenuItem>
-                {" "}
-                Quản lý Bài Quiz
-                <Link to="/admin/manage-quizzes" />
+                <NavLink
+                  to="/admin/manage-questions"
+                  className={({ isActive }) => (isActive ? "active_menu" : "")}
+                >
+                  Quản lý Câu Hỏi
+                </NavLink>
               </MenuItem>
-              <MenuItem> Quản lý Câu Hỏi</MenuItem>
             </SubMenu>
             {/* <SubMenu
               suffix={<span className="badge yellow">3</span>}

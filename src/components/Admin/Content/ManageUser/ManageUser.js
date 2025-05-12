@@ -44,7 +44,7 @@ const ManageUser = (props) => {
     setDataDelete(user);
   };
 
-  console.log(currentPage);
+  // console.log(currentPage);
   return (
     <>
       <div className="manageUser-container p-2">
