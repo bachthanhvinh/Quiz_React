@@ -25,32 +25,11 @@ function Questions() {
       id: uuidv4(),
       description: "questions 1",
       imageFile: "",
+      imageName: "",
       answers: [
         {
           id: uuidv4(),
           description: "answers 1",
-          isCorrect: false,
-        },
-        {
-          id: uuidv4(),
-          description: "answers 2",
-          isCorrect: false,
-        },
-      ],
-    },
-    {
-      id: uuidv4(),
-      description: "questions 2",
-      imageFile: "",
-      answers: [
-        {
-          id: uuidv4(),
-          description: "answers 1",
-          isCorrect: false,
-        },
-        {
-          id: uuidv4(),
-          description: "answers 2",
           isCorrect: false,
         },
       ],
@@ -63,12 +42,13 @@ function Questions() {
 
       const newQuestions = {
         id: uuidv4(),
-        description: `questions ${CloneQuestions.length + 1}`,
+        description: "",
         imageFile: "",
+        imageName: "",
         answers: [
           {
             id: uuidv4(),
-            description: `answers 1`,
+            description: "",
             isCorrect: false,
           },
         ],
@@ -78,36 +58,34 @@ function Questions() {
     }
     if (type === "REMOVE") {
       let CloneQuestions = _.cloneDeep(questions);
-      CloneQuestions = CloneQuestions.filter(
-        (item) => item.id !== questionId.id
-      );
+
+      CloneQuestions = CloneQuestions.map((q) => {
+        if (q.id === questionId.id) {
+          return {
+            ...q,
+            isRemoving: true,
+          };
+        }
+        return q;
+      });
       setQuestions(CloneQuestions);
+
+      setTimeout(() => {
+        const updated = CloneQuestions.filter(
+          (item) => item.id !== questionId.id
+        );
+        setQuestions(updated);
+      }, 300);
     }
   };
   const handleClickA = (type, questionId, answerId) => {
     if (type === "ADDANSWER") {
       let CloneQuestions = _.cloneDeep(questions);
-      // let findQuestion = CloneQuestions.find(
-      //   (item) => item?.id === questionId?.id
-      // );
-
-      // const index = findQuestion.findIndex((item) => item.id === questionId.id);
-      // const newAnswers = {
-      //   id: uuidv4(),
-      //   description: `answers  ${findQuestion[index].answers.length + 1}`,
-      //   isCorrect: false,
-      // };
-
-      // findQuestion[index].answers.push(newAnswers);
-
-      // if (index > -1) {
-      //   setQuestions(CloneQuestions);
-      // }
 
       let UpdateQuestion = CloneQuestions.map((q) => {
         const newAnswers = {
           id: uuidv4(),
-          description: `answers ${q.answers.length + 1} `,
+          description: "",
           isCorrect: false,
         };
         if (q.id === questionId.id) {
@@ -119,37 +97,74 @@ function Questions() {
         return q;
       });
       setQuestions(UpdateQuestion);
-      // console.log(UpdateQuestion);
     }
     if (type === "REMOVEANSWER") {
-      let CloneQuestions = _.cloneDeep(questions);
+      if (type === "REMOVEANSWER") {
+        let CloneQuestions = _.cloneDeep(questions);
 
-      const index = CloneQuestions.findIndex((q) => q.id === questionId.id);
+        const index = CloneQuestions.findIndex((q) => q.id === questionId.id);
 
-      if (index !== -1) {
-        CloneQuestions[index].answers = CloneQuestions[index].answers.filter(
-          (a) => a.id !== answerId.id
-        );
+        if (index !== -1) {
+          CloneQuestions[index].answers = CloneQuestions[index].answers.map(
+            (a) => (a.id === answerId.id ? { ...a, isRemoving: true } : a)
+          );
+          setQuestions(CloneQuestions);
+
+          setTimeout(() => {
+            CloneQuestions[index].answers = CloneQuestions[
+              index
+            ].answers.filter((a) => a.id !== answerId.id);
+            setQuestions([...CloneQuestions]);
+          }, 300);
+        }
       }
-
-      // console.log(CloneQuestions);
-      setQuestions(CloneQuestions);
-      // CloneQuestions = { answers: updateAnswers };
-      // let updateAnswer = CloneQuestions.map((q) => {
-      //   if (q.id === questionId.id) {
-      //     let checkAnswer = q.answers.filter((a) => a.id !== answerId.id);
-
-      //     return {
-      //       ...q,
-      //       answers: checkAnswer,
-      //     };
-      //   }
-      //   return q;
-      // });
-      // CloneQuestions = updateAnswer;
-
-      // setQuestions(CloneQuestions);
     }
+  };
+
+  const handleOnChangeQuestion = (type, qId, value) => {
+    if (type === "QUESTION") {
+      let CloneQuestions = _.cloneDeep(questions);
+      let index = CloneQuestions.findIndex((q) => q.id === qId);
+      CloneQuestions[index].description = value;
+      setQuestions(CloneQuestions);
+    }
+  };
+  const handleOnchangeQuestionFile = (qId, event) => {
+    let CloneQuestions = _.cloneDeep(questions);
+    let index = CloneQuestions.findIndex((q) => q.id === qId);
+    if (
+      index !== -1 &&
+      event.target &&
+      event.target.files &&
+      event.target.files[0]
+    ) {
+      CloneQuestions[index].imageFile = event.target.files[0];
+      CloneQuestions[index].imageName = event.target.files[0].name;
+      setQuestions(CloneQuestions);
+    }
+  };
+  const handleOnChangeAnswer = (type, qId, aId, value) => {
+    let CloneQuestions = _.cloneDeep(questions);
+
+    const index = CloneQuestions.findIndex((q) => q.id === qId);
+
+    if (index > -1) {
+      CloneQuestions[index].answers = CloneQuestions[index].answers.map((a) => {
+        if (a.id === aId) {
+          if (type === "ANSWER") {
+            a.description = value;
+          }
+          if (type === "CHECKBOX") {
+            a.isCorrect = value;
+          }
+        }
+        return a;
+      });
+      setQuestions(CloneQuestions);
+    }
+  };
+  const handleSubmitQuestionForQuiz = () => {
+    alert("submit");
   };
 
   return (
@@ -174,7 +189,10 @@ function Questions() {
               questions.length > 0 &&
               questions.map((q, index) => {
                 return (
-                  <div key={q.id} className="q-main ">
+                  <div
+                    key={q.id}
+                    className={`q-main ${q.isRemoving ? "removing" : ""}`}
+                  >
                     <div className="add-question-desc">
                       <div className=" col-6 form-floating  ">
                         <input
@@ -183,6 +201,13 @@ function Questions() {
                           id="floatingInput"
                           placeholder="description"
                           value={q.description}
+                          onChange={(event) =>
+                            handleOnChangeQuestion(
+                              "QUESTION",
+                              q.id,
+                              event.target.value
+                            )
+                          }
                         />
                         <label htmlFor="floatingInput">
                           Question's description
@@ -191,15 +216,26 @@ function Questions() {
                       <div className="upload-image_question ">
                         <div className=" ">
                           <label
-                            htmlFor="input-file"
+                            htmlFor={`${q.id}`}
                             className="icon-image-file"
                           >
                             <RiImageAddLine />
                           </label>
-                          <input id="input-file" type="file" hidden />
-                          <span className="uploadfile">
-                            0 file this uploaded
-                          </span>
+                          <input
+                            id={`${q.id}`}
+                            type="file"
+                            onChange={(event) =>
+                              handleOnchangeQuestionFile(q.id, event)
+                            }
+                            hidden
+                          />
+                          {q.imageName.length > 0 ? (
+                            <span className="uploadfile">{q.imageName}</span>
+                          ) : (
+                            <span className="uploadfile">
+                              0 file this uploaded
+                            </span>
+                          )}
                         </div>
                         <div className="btn-question ">
                           <button
@@ -225,10 +261,24 @@ function Questions() {
                       q.answers.length > 0 &&
                       q.answers.map((answers, index) => {
                         return (
-                          <div key={answers.id} className="question-answer">
+                          <div
+                            key={answers.id}
+                            className={`question-answer ${
+                              answers.isRemoving ? "removing" : ""
+                            }`}
+                          >
                             <input
                               type="checkbox"
                               className="question-answer_checkbox"
+                              checked={answers.isCorrect}
+                              onChange={(event) =>
+                                handleOnChangeAnswer(
+                                  "CHECKBOX",
+                                  q.id,
+                                  answers.id,
+                                  event.target.checked
+                                )
+                              }
                             />
                             <div className="col-6 form-floating  ">
                               <input
@@ -237,6 +287,14 @@ function Questions() {
                                 id="floatingInput"
                                 placeholder="description"
                                 value={answers.description}
+                                onChange={(event) =>
+                                  handleOnChangeAnswer(
+                                    "ANSWER",
+                                    q.id,
+                                    answers.id,
+                                    event.target.value
+                                  )
+                                }
                               />
                               <label htmlFor="floatingInput">Answer</label>
                             </div>
@@ -272,6 +330,16 @@ function Questions() {
                   </div>
                 );
               })}
+            {questions && questions.length > 0 && (
+              <div>
+                <button
+                  className="btn btn-warning mb-5"
+                  onClick={() => handleSubmitQuestionForQuiz()}
+                >
+                  Save Question
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

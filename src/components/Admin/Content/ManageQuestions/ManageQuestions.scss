@@ -102,7 +102,19 @@
   font-size: 12px;
   margin-left: 5px;
   position: absolute;
-
   top: 0;
   left: 0;
+}
+.add-question-desc,
+.q-main,
+.question-answer {
+  transition: all 0.3s ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+.add-question-desc.q-main.removing,
+.q-main.removing,
+.question-answer.removing {
+  opacity: 0;
+  transform: translateX(100px);
 }
