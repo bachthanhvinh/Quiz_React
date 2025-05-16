@@ -12,6 +12,7 @@ import "./ManageQuestions.scss";
 import { FaSquareMinus, FaSquarePlus } from "react-icons/fa6";
 import { v4 as uuidv4 } from "uuid";
 import _ from "lodash";
+import Lightbox from "react-awesome-lightbox";
 
 function Questions() {
   const options = [
@@ -20,6 +21,12 @@ function Questions() {
     { value: "HARD", label: "HARD" },
   ];
   const [selectedOption, setSelectedOption] = useState(null);
+  const [isPreview, setIsPreview] = useState(false);
+
+  const [dataPreview, setDataPreview] = useState({
+    src: "",
+    title: "",
+  });
   const [questions, setQuestions] = useState([
     {
       id: uuidv4(),
@@ -82,12 +89,12 @@ function Questions() {
     if (type === "ADDANSWER") {
       let CloneQuestions = _.cloneDeep(questions);
 
+      const newAnswers = {
+        id: uuidv4(),
+        description: "",
+        isCorrect: false,
+      };
       let UpdateQuestion = CloneQuestions.map((q) => {
-        const newAnswers = {
-          id: uuidv4(),
-          description: "",
-          isCorrect: false,
-        };
         if (q.id === questionId.id) {
           return {
             ...q,
@@ -98,25 +105,24 @@ function Questions() {
       });
       setQuestions(UpdateQuestion);
     }
+
     if (type === "REMOVEANSWER") {
-      if (type === "REMOVEANSWER") {
-        let CloneQuestions = _.cloneDeep(questions);
+      let CloneQuestions = _.cloneDeep(questions);
 
-        const index = CloneQuestions.findIndex((q) => q.id === questionId.id);
+      const index = CloneQuestions.findIndex((q) => q.id === questionId.id);
 
-        if (index !== -1) {
-          CloneQuestions[index].answers = CloneQuestions[index].answers.map(
-            (a) => (a.id === answerId.id ? { ...a, isRemoving: true } : a)
+      if (index !== -1) {
+        CloneQuestions[index].answers = CloneQuestions[index].answers.map((a) =>
+          a.id === answerId.id ? { ...a, isRemoving: true } : a
+        );
+        setQuestions(CloneQuestions);
+
+        setTimeout(() => {
+          CloneQuestions[index].answers = CloneQuestions[index].answers.filter(
+            (a) => a.id !== answerId.id
           );
-          setQuestions(CloneQuestions);
-
-          setTimeout(() => {
-            CloneQuestions[index].answers = CloneQuestions[
-              index
-            ].answers.filter((a) => a.id !== answerId.id);
-            setQuestions([...CloneQuestions]);
-          }, 300);
-        }
+          setQuestions([...CloneQuestions]);
+        }, 300);
       }
     }
   };
@@ -166,7 +172,22 @@ function Questions() {
   const handleSubmitQuestionForQuiz = () => {
     alert("submit");
   };
+  const handleClickPreview = (qId) => {
+    const CloneQuestions = _.cloneDeep(questions);
 
+    const index = CloneQuestions.findIndex((q) => q.id === qId);
+
+    if (index > -1) {
+      setDataPreview(
+        {
+          src: URL.createObjectURL(CloneQuestions[index].imageFile),
+          title: CloneQuestions[index].imageName,
+        },
+        setIsPreview(true)
+      );
+    }
+    console.log(dataPreview);
+  };
   return (
     <>
       <div className="container container-question">
@@ -188,6 +209,7 @@ function Questions() {
             {questions &&
               questions.length > 0 &&
               questions.map((q, index) => {
+                console.log(q);
                 return (
                   <div
                     key={q.id}
@@ -230,7 +252,12 @@ function Questions() {
                             hidden
                           />
                           {q.imageName.length > 0 ? (
-                            <span className="uploadfile">{q.imageName}</span>
+                            <span
+                              className="uploadfile"
+                              onClick={() => handleClickPreview(q.id)}
+                            >
+                              {q.imageName}
+                            </span>
                           ) : (
                             <span className="uploadfile">
                               0 file this uploaded
@@ -339,6 +366,13 @@ function Questions() {
                   Save Question
                 </button>
               </div>
+            )}
+            {isPreview && (
+              <Lightbox
+                image={dataPreview.src}
+                title={dataPreview.title}
+                onClose={() => setIsPreview(false)}
+              />
             )}
           </div>
         </div>
