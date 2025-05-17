@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Select from "react-select";
 import {
   BsPatchMinus,
@@ -13,15 +13,39 @@ import { FaSquareMinus, FaSquarePlus } from "react-icons/fa6";
 import { v4 as uuidv4 } from "uuid";
 import _ from "lodash";
 import Lightbox from "react-awesome-lightbox";
+import {
+  getQuizAll,
+  postCreateNewAnswerForQuiz,
+  postCreateNewQuestionForQuiz,
+} from "../../../../services/apiServices";
 
 function Questions() {
-  const options = [
-    { value: "EASY", label: "EASY" },
-    { value: "MEDIUM", label: "MEDIUM" },
-    { value: "HARD", label: "HARD" },
-  ];
+  // const options = [
+  //   { value: "EASY", label: "EASY" },
+  //   { value: "MEDIUM", label: "MEDIUM" },
+  //   { value: "HARD", label: "HARD" },
+  // ];
   const [selectedOption, setSelectedOption] = useState(null);
   const [isPreview, setIsPreview] = useState(false);
+  const [DataSelectedOption, setDataSelectedOption] = useState([]);
+
+  useEffect(() => {
+    handleClickDataOptions();
+  }, []);
+  const handleClickDataOptions = async () => {
+    const res = await getQuizAll();
+
+    const options =
+      res &&
+      res.DT &&
+      res.DT.map((options) => {
+        return {
+          value: options.id,
+          label: `${options.id} - ${options.description}`,
+        };
+      });
+    setDataSelectedOption(options);
+  };
 
   const [dataPreview, setDataPreview] = useState({
     src: "",
@@ -169,8 +193,31 @@ function Questions() {
       setQuestions(CloneQuestions);
     }
   };
-  const handleSubmitQuestionForQuiz = () => {
-    alert("submit");
+  const handleSubmitQuestionForQuiz = async () => {
+    // console.log(questions, selectedOption);
+    //     postCreateNewQuestionForQuiz,
+    // postCreateNewAnswerForQuiz,
+
+    await Promise.all(
+      questions.map(async (q) => {
+        const question = await postCreateNewQuestionForQuiz(
+          +selectedOption.value,
+          q.description,
+          q.imageFile
+        );
+        // console.log(selectedOption.value, q.description, q.imageFile);
+        await Promise.all(
+          q.answers.map(async (a) => {
+            await postCreateNewAnswerForQuiz(
+              a.description,
+              a.isCorrect,
+              question.DT.id
+            );
+            // console.log(a.description, a.isCorrect, q.id);
+          })
+        );
+      })
+    );
   };
   const handleClickPreview = (qId) => {
     const CloneQuestions = _.cloneDeep(questions);
@@ -186,7 +233,7 @@ function Questions() {
         setIsPreview(true)
       );
     }
-    console.log(dataPreview);
+    // console.log(dataPreview);
   };
   return (
     <>
@@ -202,14 +249,13 @@ function Questions() {
               <Select
                 defaultValue={selectedOption}
                 onChange={setSelectedOption}
-                options={options}
+                options={DataSelectedOption}
               />
             </div>
             <label className="mt-3 mb-1">Add Questions:</label>
             {questions &&
               questions.length > 0 &&
               questions.map((q, index) => {
-                console.log(q);
                 return (
                   <div
                     key={q.id}
