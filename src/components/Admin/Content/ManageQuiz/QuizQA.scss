@@ -1,0 +1,120 @@
+.container-question {
+  .q-main {
+    margin-bottom: 30px;
+  }
+
+  .upload-image_question {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    .icon-image-file {
+      color: rgb(74, 91, 242);
+      font-size: 30px;
+      line-height: 0;
+      display: inline-block;
+      margin-right: 10px;
+      transition: color 0.4s;
+      cursor: pointer;
+      &:hover {
+        color: #881fad;
+      }
+    }
+    .btn-question {
+      font-size: 30px;
+      display: flex;
+      //   align-items: center;
+
+      .add-question {
+        border: none;
+        background: transparent;
+
+        color: #31cfc7;
+
+        margin-right: 10px;
+        display: flex;
+        transition: color 0.4s;
+        &:hover {
+          color: #16a5aa;
+        }
+      }
+      .delete-question {
+        border: none;
+        background: transparent;
+        color: #f1c83e;
+        display: flex;
+        transition: color 0.4s;
+        &:hover {
+          color: #e7b71a;
+        }
+      }
+    }
+  }
+
+  .btn-answer {
+    margin-left: 20px;
+    font-size: 30px;
+    line-height: 0;
+
+    .add-answer {
+      border: none;
+      background: transparent;
+
+      color: #31e031;
+      margin-right: 10px;
+      transition: color 0.4s;
+      &:hover {
+        color: rgb(6, 189, 6);
+      }
+    }
+    .delete-answer {
+      border: none;
+      background: transparent;
+      color: #f1c83e;
+      transition: color 0.4s;
+      &:hover {
+        color: #e7b71a;
+      }
+    }
+  }
+  .question-answer {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    margin-left: 100px;
+    &_checkbox {
+      width: 20px;
+      height: 25px;
+      margin-right: 10px;
+    }
+  }
+  .add-question-desc {
+    display: flex;
+    gap: 50px;
+  }
+}
+.badge {
+  background-color: rgb(20, 20, 20);
+  color: white;
+  padding: 3px 7px;
+  border-radius: 999999px;
+  font-size: 12px;
+  margin-left: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.add-question-desc,
+.q-main,
+.question-answer {
+  transition: all 0.3s ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+.add-question-desc.q-main.removing,
+.q-main.removing,
+.question-answer.removing {
+  opacity: 0;
+  transform: translateX(100px);
+}
