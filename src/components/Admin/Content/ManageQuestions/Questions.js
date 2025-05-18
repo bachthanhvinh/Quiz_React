@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Select from "react-select";
 import {
   BsPatchMinus,
@@ -18,13 +18,29 @@ import {
   postCreateNewAnswerForQuiz,
   postCreateNewQuestionForQuiz,
 } from "../../../../services/apiServices";
+import { toast } from "react-toastify";
 
 function Questions() {
-  // const options = [
-  //   { value: "EASY", label: "EASY" },
-  //   { value: "MEDIUM", label: "MEDIUM" },
-  //   { value: "HARD", label: "HARD" },
-  // ];
+  const initQuiz = useMemo(
+    () => [
+      {
+        id: uuidv4(),
+        description: "",
+        imageFile: "",
+        imageName: "",
+        isCheckQ: true,
+        answers: [
+          {
+            id: uuidv4(),
+            description: "",
+            isCorrect: false,
+            isCheckA: true,
+          },
+        ],
+      },
+    ],
+    []
+  );
   const [selectedOption, setSelectedOption] = useState(null);
   const [isPreview, setIsPreview] = useState(false);
   const [DataSelectedOption, setDataSelectedOption] = useState([]);
@@ -51,21 +67,7 @@ function Questions() {
     src: "",
     title: "",
   });
-  const [questions, setQuestions] = useState([
-    {
-      id: uuidv4(),
-      description: "questions 1",
-      imageFile: "",
-      imageName: "",
-      answers: [
-        {
-          id: uuidv4(),
-          description: "answers 1",
-          isCorrect: false,
-        },
-      ],
-    },
-  ]);
+  const [questions, setQuestions] = useState(initQuiz);
 
   const handleClickQ = (type, questionId) => {
     if (type === "ADD") {
@@ -76,11 +78,13 @@ function Questions() {
         description: "",
         imageFile: "",
         imageName: "",
+        isCheckQ: true,
         answers: [
           {
             id: uuidv4(),
             description: "",
             isCorrect: false,
+            isCheckA: true,
           },
         ],
       };
@@ -117,6 +121,7 @@ function Questions() {
         id: uuidv4(),
         description: "",
         isCorrect: false,
+        isCheckA: true,
       };
       let UpdateQuestion = CloneQuestions.map((q) => {
         if (q.id === questionId.id) {
@@ -193,31 +198,115 @@ function Questions() {
       setQuestions(CloneQuestions);
     }
   };
-  const handleSubmitQuestionForQuiz = async () => {
-    // console.log(questions, selectedOption);
-    //     postCreateNewQuestionForQuiz,
-    // postCreateNewAnswerForQuiz,
 
-    await Promise.all(
-      questions.map(async (q) => {
-        const question = await postCreateNewQuestionForQuiz(
-          +selectedOption.value,
-          q.description,
-          q.imageFile
-        );
-        // console.log(selectedOption.value, q.description, q.imageFile);
-        await Promise.all(
-          q.answers.map(async (a) => {
-            await postCreateNewAnswerForQuiz(
-              a.description,
-              a.isCorrect,
-              question.DT.id
-            );
-            // console.log(a.description, a.isCorrect, q.id);
-          })
-        );
-      })
+  const handleSubmitQuestionForQuiz = async () => {
+    //valid
+    if (_.isEmpty(selectedOption)) {
+      toast.error("Cannot empty quiz");
+      return;
+    }
+
+    let isvalidq = true;
+    let flagQ1 = 0;
+    for (let i = 0; i < questions.length; i++) {
+      if (!questions[i].description) {
+        questions[i].isCheckQ = false;
+        isvalidq = false;
+        flagQ1 = i;
+        break;
+      }
+    }
+    if (isvalidq === true) {
+      questions.map((q) => {
+        q.isCheckQ = true;
+      });
+      setQuestions([...questions]);
+    }
+    if (isvalidq === false) {
+      setQuestions([...questions]);
+      toast.error(`Not empty valid  Question ${flagQ1 + 1} `);
+      return;
+    }
+
+    let isvalidAnswer = true;
+    let flagQ = 0,
+      flagA = 0;
+    for (let i = 0; i < questions.length; i++) {
+      for (let j = 0; j < questions[i].answers.length; j++) {
+        if (!questions[i].answers[j].description) {
+          questions[i].answers[j].isCheckA = false;
+          isvalidAnswer = false;
+          flagA = j;
+          flagQ = i;
+          break;
+        }
+      }
+      if (isvalidAnswer === false) break;
+    }
+
+    if (isvalidAnswer === true) {
+      questions.forEach((q) => {
+        q.answers.forEach((a) => {
+          a.isCheckA = true;
+        });
+      });
+
+      setQuestions([...questions]);
+    }
+
+    if (isvalidAnswer === false) {
+      setQuestions([...questions]);
+      toast.error(
+        `Not empty valid Answer ${flagA + 1}  at Question ${flagQ + 1}`
+      );
+      return;
+    }
+
+    const hasCorrectAnswer = questions.some((q) =>
+      q.answers.some((a) => a.isCorrect === true)
     );
+    if (!hasCorrectAnswer) {
+      toast.error(`at least 1 question correct!`);
+      return;
+    }
+
+    ///////////////// sử dụng Promise tối ưu nhưng không chạy tuần tự mà chạy song song nên thay thế dùng for
+    //  await Promise.all(
+    //   questions.map(async (q) => {
+    //     const question = await postCreateNewQuestionForQuiz(
+    //       +selectedOption.value,
+    //       q.description,
+    //       q.imageFile
+    //     );
+    //     await Promise.all(
+    //       q.answers.map(async (a) => {
+    //         await postCreateNewAnswerForQuiz(
+    //           a.description,
+    //           a.isCorrect,
+    //           question.DT.id
+    //         );
+    //       })
+    //     );
+    //     return question;
+    //   })
+    // );
+
+    for (let q of questions) {
+      const question = await postCreateNewQuestionForQuiz(
+        +selectedOption.value,
+        q.description,
+        q.imageFile
+      );
+      for (let a of q.answers) {
+        await postCreateNewAnswerForQuiz(
+          a.description,
+          a.isCorrect,
+          question.DT.id
+        );
+      }
+    }
+    toast.success(`create question and answer success!`);
+    setQuestions(initQuiz);
   };
   const handleClickPreview = (qId) => {
     const CloneQuestions = _.cloneDeep(questions);
@@ -265,7 +354,11 @@ function Questions() {
                       <div className=" col-6 form-floating  ">
                         <input
                           type="text"
-                          className="form-control"
+                          className={
+                            q?.isCheckQ
+                              ? `form-control `
+                              : `form-control is-invalid`
+                          }
                           id="floatingInput"
                           placeholder="description"
                           value={q.description}
@@ -278,7 +371,7 @@ function Questions() {
                           }
                         />
                         <label htmlFor="floatingInput">
-                          Question's description
+                          Question {`${index + 1}`} 's description
                         </label>
                       </div>
                       <div className="upload-image_question ">
@@ -356,7 +449,11 @@ function Questions() {
                             <div className="col-6 form-floating  ">
                               <input
                                 type="text"
-                                className="form-control"
+                                className={
+                                  answers?.isCheckA
+                                    ? `form-control `
+                                    : `form-control is-invalid`
+                                }
                                 id="floatingInput"
                                 placeholder="description"
                                 value={answers.description}
@@ -369,7 +466,9 @@ function Questions() {
                                   )
                                 }
                               />
-                              <label htmlFor="floatingInput">Answer</label>
+                              <label htmlFor="floatingInput">
+                                Answer {`${index + 1}`}
+                              </label>
                             </div>
                             <div className="btn-answer ">
                               <button
