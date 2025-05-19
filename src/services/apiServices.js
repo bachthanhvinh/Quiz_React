@@ -93,6 +93,16 @@ const postCreateNewAnswerForQuiz = (
     question_id,
   });
 };
+const AssignQuizToUser = (quizId, userId) => {
+  const data = new FormData();
+  data.append("quizId", quizId);
+  data.append("userId", userId);
+  return axios.post("api/v1/quiz-assign-to-user", data);
+};
+
+const getQuizWithQA = (QuizId) => {
+  return axios.get(`api/v1/quiz-with-qa/${QuizId}`);
+};
 export {
   postCreateNewUser,
   getAllUser,
@@ -110,4 +120,6 @@ export {
   deleteQuiz,
   postCreateNewQuestionForQuiz,
   postCreateNewAnswerForQuiz,
+  AssignQuizToUser,
+  getQuizWithQA,
 };

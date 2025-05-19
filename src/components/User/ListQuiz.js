@@ -18,7 +18,7 @@ function ListQuiz() {
   };
   // console.log(dataQuiz);
   return (
-    <div className="container d-flex  justify-content-between card-item">
+    <div className="container quiz-List card-item  ">
       {dataQuiz && dataQuiz.length > 0 ? (
         <>
           {dataQuiz.map((quiz, index) => {
@@ -28,11 +28,13 @@ function ListQuiz() {
                   className="card cart-quiz-item  "
                   style={{ width: "18rem" }}
                 >
-                  <img
-                    className="card-img-top card-img-item"
-                    src={`data:image/png;base64,${quiz.image}`}
-                    alt="Card image cap"
-                  />
+                  <div className="card-img-item">
+                    <img
+                      className="card-img-top "
+                      src={`data:image/png;base64,${quiz.image}`}
+                      alt="Card image cap"
+                    />
+                  </div>
                   <div className="card-body  ">
                     <h5 className="card-title">Quiz {index + 1}</h5>
                     <p className="card-text">{quiz.description}</p>

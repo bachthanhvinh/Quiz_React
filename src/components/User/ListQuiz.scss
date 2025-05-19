@@ -1,1 +1,25 @@
-
+.quiz-List {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+}
+.cart-quiz-item {
+  height: 430px;
+}
+.card-img-item {
+  height: 250px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+.card-text {
+  height: 60px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

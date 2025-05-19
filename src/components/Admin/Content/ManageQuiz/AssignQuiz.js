@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import Select from "react-select";
-import { getAllUser, getQuizAll } from "../../../../services/apiServices";
+import {
+  AssignQuizToUser,
+  getAllUser,
+  getQuizAll,
+} from "../../../../services/apiServices";
+import { toast } from "react-toastify";
 
 function AssignQuiz(props) {
   //
@@ -23,7 +28,7 @@ function AssignQuiz(props) {
       res.DT.map((options) => {
         return {
           value: options.id,
-          label: `${options.id} - ${options.description}`,
+          label: `${options.id} - ${options.name}`,
         };
       });
     setDataSelectedOption(options);
@@ -42,6 +47,22 @@ function AssignQuiz(props) {
       });
     setDataSelectedUsers(users);
   };
+  const HandleClickAssignQuizToUser = async () => {
+    const res = await AssignQuizToUser(
+      selectedOption.value,
+      selectedUsers.value
+    );
+
+    if (res && res.EC === 0) {
+      toast.success(res.EM);
+      setSelectedOption(null);
+      setSelectedUsers(null);
+    } else {
+      toast.error(res.EM);
+    }
+  };
+  // console.log(DataSelectedOption, DataSelectedUsers);
+
   return (
     <>
       <div className="container ">
@@ -49,21 +70,30 @@ function AssignQuiz(props) {
           <div className=" col-6 form-group">
             <label className="mb-1">Select Quiz:</label>
             <Select
-              defaultValue={selectedOption}
               onChange={setSelectedOption}
               options={DataSelectedOption}
+              value={selectedOption}
+              isClearable={true}
+              defaultValue={null}
             />
           </div>
           <div className=" col-6 form-group">
             <label className="mb-1">Select Users:</label>
             <Select
-              defaultValue={selectedUsers}
               onChange={setSelectedUsers}
               options={DataSelectedUsers}
+              value={selectedUsers}
+              isClearable={true}
+              defaultValue={null}
             />
           </div>
         </div>
-        <button className="btn btn-warning mt-4">Assign</button>
+        <button
+          className="btn btn-warning mt-4"
+          onClick={() => HandleClickAssignQuizToUser()}
+        >
+          Assign
+        </button>
       </div>
     </>
   );

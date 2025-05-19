@@ -17,6 +17,7 @@ import {
   getQuizAll,
   postCreateNewAnswerForQuiz,
   postCreateNewQuestionForQuiz,
+  getQuizWithQA,
 } from "../../../../services/apiServices";
 import { toast } from "react-toastify";
 
@@ -48,6 +49,43 @@ function QuizQA() {
   useEffect(() => {
     handleClickDataOptions();
   }, []);
+
+  useEffect(() => {
+    if (selectedOption) {
+      fetchApiQuizAnswerQuiz();
+      console.log(selectedOption);
+    }
+  }, [selectedOption]);
+
+  // return a promise that resolves with a File instance
+  function urltoFile(url, filename, mimeType) {
+    return fetch(url)
+      .then((res) => res.arrayBuffer())
+      .then((buf) => new File([buf], filename, { type: mimeType }));
+  }
+
+  const fetchApiQuizAnswerQuiz = async () => {
+    const res = await getQuizWithQA(selectedOption.value);
+    let newQ = [];
+    for (let i = 0; i < res.DT.qa.length; i++) {
+      let q = res.DT.qa[i];
+      if (q.imageFile) {
+        q.imageName = `Question-${q.id}.png`;
+        q.imageFile = await urltoFile(
+          `data:File/png;base64,${q.imageFile}`,
+          `Question-${q.id}.png`,
+          "File/png"
+        );
+      }
+
+      newQ.push(q);
+    }
+
+    if (res && res.DT && res.DT.qa) {
+      setQuestions([...newQ]);
+    }
+  };
+
   const handleClickDataOptions = async () => {
     const res = await getQuizAll();
 
@@ -355,9 +393,9 @@ function QuizQA() {
                         <input
                           type="text"
                           className={
-                            q?.isCheckQ
-                              ? `form-control `
-                              : `form-control is-invalid`
+                            // q?.isCheckQ
+                            `form-control `
+                            // : `form-control is-invalid`
                           }
                           id="floatingInput"
                           placeholder="description"
@@ -450,9 +488,9 @@ function QuizQA() {
                               <input
                                 type="text"
                                 className={
-                                  answers?.isCheckA
-                                    ? `form-control `
-                                    : `form-control is-invalid`
+                                  // answers?.isCheckA
+                                  `form-control `
+                                  // : `form-control is-invalid`
                                 }
                                 id="floatingInput"
                                 placeholder="description"
