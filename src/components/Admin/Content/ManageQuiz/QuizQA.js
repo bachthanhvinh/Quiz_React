@@ -18,6 +18,7 @@ import {
   postCreateNewAnswerForQuiz,
   postCreateNewQuestionForQuiz,
   getQuizWithQA,
+  UpsertQuizWithQA,
 } from "../../../../services/apiServices";
 import { toast } from "react-toastify";
 
@@ -51,9 +52,8 @@ function QuizQA() {
   }, []);
 
   useEffect(() => {
-    if (selectedOption) {
+    if (selectedOption && selectedOption.value) {
       fetchApiQuizAnswerQuiz();
-      console.log(selectedOption);
     }
   }, [selectedOption]);
 
@@ -105,6 +105,7 @@ function QuizQA() {
     src: "",
     title: "",
   });
+
   const [questions, setQuestions] = useState(initQuiz);
 
   const handleClickQ = (type, questionId) => {
@@ -308,43 +309,37 @@ function QuizQA() {
       return;
     }
 
-    ///////////////// sử dụng Promise tối ưu nhưng không chạy tuần tự mà chạy song song nên thay thế dùng for
-    //  await Promise.all(
-    //   questions.map(async (q) => {
-    //     const question = await postCreateNewQuestionForQuiz(
-    //       +selectedOption.value,
-    //       q.description,
-    //       q.imageFile
-    //     );
-    //     await Promise.all(
-    //       q.answers.map(async (a) => {
-    //         await postCreateNewAnswerForQuiz(
-    //           a.description,
-    //           a.isCorrect,
-    //           question.DT.id
-    //         );
-    //       })
-    //     );
-    //     return question;
-    //   })
-    // );
-
-    for (let q of questions) {
-      const question = await postCreateNewQuestionForQuiz(
-        +selectedOption.value,
-        q.description,
-        q.imageFile
-      );
-      for (let a of q.answers) {
-        await postCreateNewAnswerForQuiz(
-          a.description,
-          a.isCorrect,
-          question.DT.id
-        );
-      }
+    function getBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = (error) => reject(error);
+      });
     }
-    toast.success(`create question and answer success!`);
-    setQuestions(initQuiz);
+
+    const CloneQuestions = _.cloneDeep(questions);
+    let newFile = [];
+    for (let i = 0; i < CloneQuestions.length; i++) {
+      const q = CloneQuestions[i];
+      if (q.imageFile) {
+        q.imageFile = await getBase64(q.imageFile);
+      }
+      newFile.push(q);
+    }
+
+    const rs = await UpsertQuizWithQA({
+      quizId: selectedOption.value,
+      questions: newFile,
+    });
+
+    if (rs && rs.EC === 0) {
+      toast.success(rs.EM);
+      fetchApiQuizAnswerQuiz();
+    } else {
+      toast.error(rs.EM);
+    }
+    console.log(newFile);
   };
   const handleClickPreview = (qId) => {
     const CloneQuestions = _.cloneDeep(questions);
@@ -360,8 +355,8 @@ function QuizQA() {
         setIsPreview(true)
       );
     }
-    // console.log(dataPreview);
   };
+  console.log(questions);
   return (
     <>
       <div className="container container-question">
