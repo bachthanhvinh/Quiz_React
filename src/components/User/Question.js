@@ -1,7 +1,10 @@
 import _ from "lodash";
-
+import { useState } from "react";
+import Lightbox from "react-awesome-lightbox";
 function Question(prop) {
   const { data, index, handleClickCheck } = prop;
+  const [isPreview, setIsPreview] = useState(false);
+
   if (_.isEmpty(data)) {
     return <></>;
   }
@@ -14,11 +17,22 @@ function Question(prop) {
       <div className="detail-Quiz_bodyQuestion">
         <div className="text-center my-3">
           {data && data.image ? (
-            <img
-              className="image_Quiz  mt-3"
-              src={`data:image/jpg;base64,${data.image}`}
-              alt="image-question"
-            />
+            <>
+              <img
+                className="image_Quiz  mt-3"
+                src={`data:image/jpg;base64,${data.image}`}
+                alt="image-question"
+                onClick={() => setIsPreview(true)}
+              />
+
+              {isPreview === true && (
+                <Lightbox
+                  image={`data:image/jpg;base64,${data.image}`}
+                  title={`question-${data.image}`}
+                  onClose={() => setIsPreview(false)}
+                />
+              )}
+            </>
           ) : (
             <div className="image_nothing  mt-3">{`(Không có ảnh)`}</div>
           )}
@@ -41,6 +55,7 @@ function Question(prop) {
                     id={`flexCheckDefault-${index}`}
                     onChange={() => handleClickRadio(data.questionId, a.id)}
                   />
+
                   <label
                     className="form-check-label"
                     htmlFor={`flexCheckDefault-${index}`}

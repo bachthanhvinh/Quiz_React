@@ -27,5 +27,28 @@
     border: 2px solid #ddd;
     border-radius: 8px;
     padding: 10px;
+    .main-timer {
+      text-align: center;
+      border-bottom: 1px dashed #999696;
+      padding: 15px 0px 15px 0px;
+    }
+    .main-question {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-top: 15px;
+      transform: scale(0.9);
+      & :hover {
+        background-color: #b8b7b7;
+        transform: scale(1.2);
+      }
+      .question {
+        padding: 7px 15px;
+        border: 1px solid #656565;
+        border-radius: 9999px;
+        cursor: pointer;
+        transition: 0.4s;
+      }
+    }
   }
 }

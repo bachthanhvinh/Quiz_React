@@ -9,7 +9,7 @@ function ModalQuizUser(props) {
   const handleClose = () => {
     setShow(false);
   };
-  console.log(dataAnswers);
+  // console.log(dataAnswers);
   return (
     <>
       <Modal show={show} onHide={handleClose} backdrop="static">

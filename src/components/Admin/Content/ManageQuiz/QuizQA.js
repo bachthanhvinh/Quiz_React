@@ -319,18 +319,17 @@ function QuizQA() {
     }
 
     const CloneQuestions = _.cloneDeep(questions);
-    let newFile = [];
+
     for (let i = 0; i < CloneQuestions.length; i++) {
       const q = CloneQuestions[i];
       if (q.imageFile) {
         q.imageFile = await getBase64(q.imageFile);
       }
-      newFile.push(q);
     }
 
     const rs = await UpsertQuizWithQA({
       quizId: selectedOption.value,
-      questions: newFile,
+      questions: CloneQuestions,
     });
 
     if (rs && rs.EC === 0) {
@@ -339,7 +338,6 @@ function QuizQA() {
     } else {
       toast.error(rs.EM);
     }
-    console.log(newFile);
   };
   const handleClickPreview = (qId) => {
     const CloneQuestions = _.cloneDeep(questions);
@@ -356,7 +354,6 @@ function QuizQA() {
       );
     }
   };
-  console.log(questions);
   return (
     <>
       <div className="container container-question">

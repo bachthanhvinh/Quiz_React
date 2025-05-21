@@ -5,6 +5,7 @@ import _ from "lodash";
 import "./DetailQuiz.scss";
 import Question from "./Question";
 import ModalQuizUser from "./ModalQuizUser";
+import RightContent from "./Content/RightContent";
 function DetaiQuiz() {
   const param = useParams();
   const quizId = param.id;
@@ -163,7 +164,9 @@ function DetaiQuiz() {
               </button>
             </div>
           </div>
-          <div className="detail-Quiz_countDown">CountDown</div>
+          <div className="detail-Quiz_countDown">
+            <RightContent dataQ={dataQ} />
+          </div>
         </div>
       </div>
       <ModalQuizUser
