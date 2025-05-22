@@ -18,10 +18,10 @@ function ModalQuizUser(props) {
         </Modal.Header>
         <Modal.Body>
           <div>
-            countCorrect: <b>{dataAnswers.countCorrect}</b>
+            Total Question: <b>{dataAnswers.countTotal}</b>
           </div>
           <div>
-            countTotal: <b>{dataAnswers.countTotal}</b>
+            Total Correct Answer: <b>{dataAnswers.countCorrect}</b>
           </div>
         </Modal.Body>
         <Modal.Footer>
