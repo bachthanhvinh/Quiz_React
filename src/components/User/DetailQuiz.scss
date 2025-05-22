@@ -43,7 +43,11 @@
         transform: scale(1.2);
       }
       .question {
-        padding: 7px 15px;
+        width: 53px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         border: 1px solid #656565;
         border-radius: 9999px;
         cursor: pointer;
