@@ -52,6 +52,13 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        &.SelectedAnswer {
+          background-color: #5a5a5a;
+          color: white;
+        }
+        &.clicked {
+          color: red;
+        }
       }
     }
   }
