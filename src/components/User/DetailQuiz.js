@@ -15,6 +15,7 @@ function DetaiQuiz() {
   const [index, setIndex] = useState(0);
   const [checkShowModal, setCheckShowModal] = useState(false);
   const [dataAnswers, setDataAnswers] = useState({});
+  const [time, setTime] = useState(300);
 
   const handleNext = () => {
     if (dataQ && dataQ.length > index + 1) setIndex(index + 1);
@@ -26,7 +27,7 @@ function DetaiQuiz() {
   };
   useEffect(() => {
     fetchdataQuiz();
-  }, [quizId]);
+  }, [quizId, checkShowModal]);
 
   const handleClickCheck = (questionId, answerId) => {
     // console.log(questionId, answerId);
@@ -78,6 +79,7 @@ function DetaiQuiz() {
     // console.log(" >>> Check", res);
     if (res && res.EC === 0) {
       setCheckShowModal(true);
+      setTime(0);
       setDataAnswers({
         countCorrect: res.DT.countCorrect,
         countTotal: res.DT.countTotal,
@@ -165,7 +167,13 @@ function DetaiQuiz() {
             </div>
           </div>
           <div className="detail-Quiz_countDown">
-            <RightContent dataQ={dataQ} handleFinish={handleFinish} />
+            <RightContent
+              dataQ={dataQ}
+              handleFinish={handleFinish}
+              setIndex={setIndex}
+              time={time}
+              setTime={setTime}
+            />
           </div>
         </div>
       </div>
@@ -173,6 +181,7 @@ function DetaiQuiz() {
         show={checkShowModal}
         setShow={setCheckShowModal}
         dataAnswers={dataAnswers}
+        setTime={setTime}
       />
     </>
   );

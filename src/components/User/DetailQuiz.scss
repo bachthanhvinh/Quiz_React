@@ -30,7 +30,7 @@
     .main-timer {
       text-align: center;
       border-bottom: 1px dashed #999696;
-      padding: 15px 0px 15px 0px;
+      padding: 15px 0px 10px 0px;
     }
     .main-question {
       display: flex;
@@ -52,7 +52,17 @@
         border-radius: 9999px;
         cursor: pointer;
         transition: 0.4s;
+        &.isCheck {
+          background-color: rgb(106, 106, 106);
+          color: white;
+        }
+        &.isClicked {
+          color: red;
+        }
       }
     }
   }
+}
+.CountDownTime {
+  font-size: 20px;
 }

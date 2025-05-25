@@ -1,10 +1,9 @@
 import { set } from "lodash";
 import { useEffect, useState } from "react";
-
+import "../DetailQuiz.scss";
 const CountDown = (props) => {
-  const { timeOut } = props;
+  const { timeOut, time, setTime } = props;
 
-  const [time, setTime] = useState(5);
   useEffect(() => {
     if (time === 0) {
       timeOut();
@@ -32,7 +31,7 @@ const CountDown = (props) => {
   };
   return (
     <>
-      <div>{toHHMMSS(time)}</div>
+      <div className="CountDownTime">{toHHMMSS(time)}</div>
     </>
   );
 };

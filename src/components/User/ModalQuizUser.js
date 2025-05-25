@@ -4,10 +4,11 @@ import Modal from "react-bootstrap/Modal";
 import { toast } from "react-toastify";
 
 function ModalQuizUser(props) {
-  const { show, setShow, dataAnswers } = props;
+  const { show, setShow, dataAnswers, setTime } = props;
 
   const handleClose = () => {
     setShow(false);
+    setTime(300);
   };
   // console.log(dataAnswers);
   return (
