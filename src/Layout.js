@@ -14,6 +14,7 @@ import Error404 from "./components/Error404";
 import ManageQuiz from "./components/Admin/Content/ManageQuiz/ManageQuiz";
 import ManageUser from "./components/Admin/Content/ManageUser/ManageUser";
 import ManageQuestion from "./components/Admin/Content/ManageQuestions/ManageQuestions";
+import PrivateRouter from "./components/routes/PrivateRouter";
 
 function Layout() {
   return (
@@ -21,12 +22,26 @@ function Layout() {
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} />
-          <Route path="users" element={<ListQuiz />} />
+          <Route
+            path="users"
+            element={
+              <PrivateRouter>
+                <ListQuiz />
+              </PrivateRouter>
+            }
+          />
         </Route>
 
         <Route path="/quiz/:id" element={<DetaiQuiz />} />
 
-        <Route path="admin" element={<Admin />}>
+        <Route
+          path="admin"
+          element={
+            <PrivateRouter>
+              <Admin />
+            </PrivateRouter>
+          }
+        >
           <Route index element={<DashBoard />} />
           <Route path="manage-users" element={<ManageUser />} />
           <Route path="manage-quizzes" element={<ManageQuiz />} />
