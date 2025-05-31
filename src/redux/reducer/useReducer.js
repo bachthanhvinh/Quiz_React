@@ -1,4 +1,7 @@
-import { FETCH_USER_LOGIN_SUCCESS } from "../action/userAction";
+import {
+  FETCH_USER_LOGIN_SUCCESS,
+  FETCH_USER_LOGOUT_SUCCESS,
+} from "../action/userAction";
 
 const INITIAL_STATE = {
   account: {
@@ -28,6 +31,20 @@ const useReducer = (state = INITIAL_STATE, action) => {
         },
 
         isAuthenticated: true,
+      };
+    case FETCH_USER_LOGOUT_SUCCESS:
+      return {
+        ...state,
+        account: {
+          access_token: "",
+          email: "",
+          image: "",
+          refresh_token: "",
+          role: "",
+          uesrname: "",
+        },
+
+        isAuthenticated: false,
       };
 
     default:
