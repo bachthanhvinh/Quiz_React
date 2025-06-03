@@ -9,6 +9,7 @@ import "./Header.scss";
 import { logout } from "../../services/apiServices";
 import { toast } from "react-toastify";
 import { doLogOut } from "../../redux/action/userAction";
+import Language from "./Language";
 const Header = () => {
   const account = useSelector((state) => state.user.account);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
@@ -58,20 +59,24 @@ const Header = () => {
                   Log in
                 </button>
                 <button
-                  className="btn-signUp"
+                  className="btn-signUp me-3"
                   onClick={() => handleClickRegister()}
                 >
                   Sign up
                 </button>
+                <Language />
               </>
             ) : (
-              <NavDropdown title="Settings" id="basic-nav-dropdown">
-                <NavDropdown.Item onClick={() => handleLogOut()}>
-                  Log out
-                </NavDropdown.Item>
-                <NavDropdown.Item>Profile</NavDropdown.Item>
-                <NavDropdown.Divider />
-              </NavDropdown>
+              <>
+                <NavDropdown title="Settings" id="basic-nav-dropdown">
+                  <NavDropdown.Item onClick={() => handleLogOut()}>
+                    Log out
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>Profile</NavDropdown.Item>
+                  <NavDropdown.Divider />
+                </NavDropdown>
+                <Language />
+              </>
             )}
           </Nav>
         </Navbar.Collapse>

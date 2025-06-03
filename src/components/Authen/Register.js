@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { IoIosEye, IoIosEyeOff, oIosEye } from "react-icons/io";
 import { RegisterUser } from "../../services/apiServices";
 import { toast } from "react-toastify";
+import Language from "../Header/Language";
 function Register() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -50,10 +51,23 @@ function Register() {
   const handleClickToggle = () => {
     setShowPassword((prev) => !prev);
   };
-
+  const handleSignup = () => {
+    navigate("/login");
+  };
   return (
     <>
       <div className="register-container   ">
+        <div className="SignUp-account d-flex justify-content-end align-items-center mt-2 container">
+          <span>Already have an account?</span>
+          <button
+            className="btn-SignUpUser btn mx-2"
+            onClick={() => handleSignup()}
+          >
+            Log In
+          </button>
+          <span className="me-5 text-decoration-underline">Need help?</span>
+          <Language />
+        </div>
         <div className="form-content mx-auto col-4 ">
           <div className="text-center mt-5">
             <h2 className="form-content__h2 mb-4">Quizform</h2>

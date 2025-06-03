@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { doLogin } from "../../redux/action/userAction";
 import { ImSpinner2 } from "react-icons/im";
+import Language from "../Header/Language";
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -59,7 +60,7 @@ function Login() {
   return (
     <>
       <div className="Login-container">
-        <div className="SignUp-account d-flex justify-content-end align-items-center mt-2">
+        <div className="SignUp-account d-flex justify-content-end align-items-center mt-2 container">
           <span>Don't have an account yet?</span>
           <button
             className="btn-SignUpUser btn mx-2"
@@ -68,6 +69,7 @@ function Login() {
             Sign up
           </button>
           <span className="me-5 text-decoration-underline">Need help?</span>
+          <Language />
         </div>
         <div className="form-content col-4 mx-auto">
           <div className="text-center">
