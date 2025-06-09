@@ -15,10 +15,12 @@ import ManageQuiz from "./components/Admin/Content/ManageQuiz/ManageQuiz";
 import ManageUser from "./components/Admin/Content/ManageUser/ManageUser";
 import ManageQuestion from "./components/Admin/Content/ManageQuestions/ManageQuestions";
 import PrivateRouter from "./components/routes/PrivateRouter";
+import { Suspense } from "react";
+// import { Suspense } from "react";
 
 function Layout() {
   return (
-    <>
+    <Suspense fallback="...is loading">
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} />
@@ -65,7 +67,7 @@ function Layout() {
         theme="light"
         transition={Bounce}
       />
-    </>
+    </Suspense>
   );
 }
 export default Layout;

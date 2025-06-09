@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { doLogin } from "../../redux/action/userAction";
 import { ImSpinner2 } from "react-icons/im";
 import Language from "../Header/Language";
+import { useTranslation } from "react-i18next";
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -56,30 +57,33 @@ function Login() {
   const handleSignup = () => {
     navigate("/register");
   };
-
+  const { t } = useTranslation();
   return (
     <>
       <div className="Login-container">
         <div className="SignUp-account d-flex justify-content-end align-items-center mt-2 container">
-          <span>Don't have an account yet?</span>
+          <span>{t("pagelogin.noAccount")}</span>
           <button
             className="btn-SignUpUser btn mx-2"
             onClick={() => handleSignup()}
           >
-            Sign up
+            {t("pagelogin.signup")}
           </button>
-          <span className="me-5 text-decoration-underline">Need help?</span>
+          <span className="me-5 text-decoration-underline">
+            {" "}
+            {t("pagelogin.needhelp")}
+          </span>
           <Language />
         </div>
         <div className="form-content col-4 mx-auto">
           <div className="text-center">
-            <h2 className="mb-5 mt-5">Quizform</h2>
-            <h4 className="mb-4">Hello, who's this?</h4>
+            <h2 className="mb-5 mt-5">{t("pagelogin.Quizform")}</h2>
+            <h4 className="mb-4">{t("pagelogin.hello")}</h4>
           </div>
           <form>
             <div className="content-form ">
               <div className="form-group">
-                <label className="mb-3">Email</label>
+                <label className="mb-3">{t("pagelogin.Email")}</label>
                 <input
                   type="email"
                   className="form-control"
@@ -91,7 +95,7 @@ function Login() {
                 />
               </div>
               <div className="form-group">
-                <label className="mb-3 mt-3">Password</label>
+                <label className="mb-3 mt-3">{t("pagelogin.Password")}</label>
                 <input
                   type="password"
                   className="form-control "
@@ -103,7 +107,7 @@ function Login() {
               </div>
               <div className="d-flex flex-column">
                 <span className="mt-3 mb-4 text-decoration-underline ">
-                  Forgot password ?{" "}
+                  {t("pagelogin.fpassword")}{" "}
                 </span>
                 <button
                   className="btn-loginUser btn mt-3 "
@@ -113,13 +117,13 @@ function Login() {
                   {checkDisabled === true && (
                     <ImSpinner2 className="loaderIcon" />
                   )}
-                  Log in to Quiz
+                  {t("pagelogin.login")}
                 </button>
               </div>
             </div>
           </form>
           <div className="goBackHome" onClick={() => navigate("/")}>
-            <span className="back"> &#60;&#60; Go back home</span>
+            <span className="back"> &#60;&#60; {t("pagelogin.Gohome")}</span>
           </div>
         </div>
       </div>

@@ -1,0 +1,39 @@
+{
+  "homepage": {
+    "title1": "Có Rất nhiều cái để hỏi...",
+    "title2": "Bạn không muốn tạo một biểu mẫu nhàm chán. Và khán giả của bạn sẽ không trả lời. Thay vào đó, hãy tạo một biểu mẫu kiểu chữ - và làm cho mọi người vui vẻ.",
+    "button": {
+      "btn1": "Làm bài quiz ngày bây giờ",
+      "btn2": "Bắt đầu thôi, Nó miễn phí"
+    },
+    "commit": {
+      "cm1": "Không cần thẻ tín dụng",
+      "cm2": "Không giới hạn thời gian cho gói Miễn phí"
+    }
+  },
+  "header": {
+    "authen": {
+      "login": "Đăng nhập",
+      "signup": "Đăng ký",
+      "logout": "Đăng xuất",
+      "profile": "Hồ sơ"
+    },
+    "menu": {
+      "home": "Trang chủ",
+      "users": "Người dùng",
+      "admin": "Quản trị viên"
+    }
+  },
+  "pagelogin": {
+    "noAccount": "Bạn có tài khoản chưa?",
+    "signup": "Đăng ký",
+    "needhelp": "hỗ trợ?",
+    "Quizform": "Quizform",
+    "hello": "Xin chào, ai đây?",
+    "Email": "Email",
+    "Password": "Mật khẩu",
+    "fpassword": "Quên mật khẩu ?",
+    "login": "Đăng nhập vào Quiz",
+    "Gohome": "Quay lại trang chủ"
+  }
+}

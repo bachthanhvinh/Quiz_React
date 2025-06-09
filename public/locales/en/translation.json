@@ -1,0 +1,39 @@
+{
+  "homepage": {
+    "title1": "There's a better way to ask",
+    "title2": "You don't want to make a boring form. And your audience won't answer one . Create a typeform instead-and make everyon happy.",
+    "button": {
+      "btn1": "Take the quiz now",
+      "btn2": "Get's Started. It's free"
+    },
+    "commit": {
+      "cm1": "No credit card required",
+      "cm2": "No time limit on Free plan"
+    }
+  },
+  "header": {
+    "authen": {
+      "login": "Login",
+      "signup": "Sign Up",
+      "logout": "Log Out",
+      "profile": "Profile"
+    },
+    "menu": {
+      "home": "Home",
+      "users": "Users",
+      "admin": "Admin"
+    }
+  },
+  "pagelogin": {
+    "noAccount": "Don't have an account yet?",
+    "signup": "Sign up",
+    "needhelp": "Need help?",
+    "Quizform": "Quizform",
+    "hello": "Hello, who's this?",
+    "Email": "Email",
+    "Password": "Password",
+    "fpassword": "Forgot password ?",
+    "login": "Log in to Quiz",
+    "Gohome": "Go back home"
+  }
+}
