@@ -1,0 +1,28 @@
+.container-dashboard {
+  padding: 20px;
+
+  &__title {
+    color: rgb(48, 49, 49);
+    margin-bottom: 10px;
+  }
+  .d-content {
+    display: flex;
+    &__left {
+      display: grid;
+
+      grid-template-columns: repeat(2, 1fr);
+      gap: 5px;
+      width: 40%;
+      &--item {
+        border: 1px solid #ddd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+      }
+    }
+    &__right {
+      width: 60%;
+    }
+  }
+}

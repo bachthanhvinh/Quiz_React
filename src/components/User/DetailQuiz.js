@@ -113,6 +113,8 @@ function DetaiQuiz() {
               answers.push({ ...item.answers, isSelected: false });
             }
           });
+
+          answers = _.orderBy(answers, ["id"], ["asc"]);
           return {
             questionId: +key,
             answers,

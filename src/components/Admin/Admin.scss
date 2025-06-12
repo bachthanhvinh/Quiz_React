@@ -8,8 +8,15 @@
   .admin-content {
     width: 100%;
     .admin-header {
-      height: 40px;
-      border: 1px solid green;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgb(153, 153, 153);
+      padding: 15px 10px;
+      & span {
+        font-size: 20px;
+        color: rgb(72, 72, 71);
+      }
     }
     .admin-main {
       height: calc(100vh - 40px);
@@ -56,4 +63,8 @@
 }
 .active_menu {
   color: rgb(113 228 255) !important;
+}
+.Dropdown {
+  display: flex;
+  gap: 20px;
 }

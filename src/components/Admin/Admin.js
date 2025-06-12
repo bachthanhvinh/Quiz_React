@@ -5,6 +5,7 @@ import { useState } from "react";
 import sidebarBg from "../../assets/bg2.jpg";
 import { Outlet } from "react-router-dom";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import DropdownandLanguage from "./DropdownandLanguage";
 const Admin = (props) => {
   const [collapsed, setCollapsed] = useState(false);
 
@@ -16,7 +17,12 @@ const Admin = (props) => {
       <div className="admin-content">
         {/* onClick={} */}
         <div className="admin-header">
-          <FaBars onClick={() => setCollapsed(!collapsed)} />
+          <span onClick={() => setCollapsed(!collapsed)}>
+            <FaBars />
+          </span>
+          <div>
+            <DropdownandLanguage />
+          </div>
         </div>
         <div className="admin-main">
           <PerfectScrollbar>

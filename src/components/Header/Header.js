@@ -72,7 +72,7 @@ const Header = () => {
             ) : (
               <>
                 <NavDropdown
-                  title={i18n.language === "vi" ? "Tùy chỉnh" : "Setting"}
+                  title={i18n.language === "vi" ? "Tùy chỉnh" : "Settings"}
                   id="basic-nav-dropdown"
                 >
                   <NavDropdown.Item onClick={() => handleLogOut()}>
