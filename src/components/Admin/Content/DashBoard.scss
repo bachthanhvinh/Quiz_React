@@ -3,22 +3,64 @@
 
   &__title {
     color: rgb(48, 49, 49);
-    margin-bottom: 10px;
+    margin-bottom: 30px;
   }
   .d-content {
+    margin-top: 50px;
+
     display: flex;
+    gap: 10px;
     &__left {
       display: grid;
 
       grid-template-columns: repeat(2, 1fr);
-      gap: 5px;
+      gap: 10px;
       width: 40%;
-      &--item {
+      .left-item1,
+      .left-item2,
+      .left-item3,
+      .left-item4 {
         border: 1px solid #ddd;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 10px;
+        flex-direction: column;
+        .left-item__1 {
+          font-size: 18px;
+          font-weight: 600;
+        }
+        &.left-item__2 {
+          font-size: 25px;
+        }
+      }
+      .left-item1 {
+        background: linear-gradient(
+          to right,
+          rgb(244, 107, 69),
+          rgb(238, 168, 73)
+        );
+      }
+      .left-item2 {
+        background: linear-gradient(
+          to right,
+          rgb(64, 58, 62),
+          rgb(190, 88, 105)
+        );
+      }
+      .left-item3 {
+        background: linear-gradient(
+          to right,
+          rgb(255, 183, 94),
+          rgb(237, 143, 3)
+        );
+      }
+      .left-item4 {
+        background: linear-gradient(
+          to right,
+          rgb(103, 58, 183),
+          rgb(81, 45, 168)
+        );
       }
     }
     &__right {

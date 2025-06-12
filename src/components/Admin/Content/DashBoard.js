@@ -1,104 +1,119 @@
 import {
-  Area,
-  AreaChart,
+  Bar,
+  BarChart,
   CartesianGrid,
+  Legend,
+  Line,
+  LineChart,
+  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
 import "./DashBoard.scss";
+import { useEffect, useState } from "react";
+import { getOverView } from "../../../services/apiServices";
 const DashBoard = (props) => {
-  const data = [
-    {
-      name: "Page A",
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      name: "Page B",
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: "Page C",
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: "Page D",
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: "Page E",
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: "Page F",
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: "Page G",
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-  ];
+  const [dataOverView, setDataOverView] = useState([]);
+  const [dataCharts, setDataCharts] = useState([]);
+
+  useEffect(() => {
+    getDataOverView();
+  }, []);
+
+  const getDataOverView = async () => {
+    const res = await getOverView();
+    if (res.DT && res.EC === 0) {
+      setDataOverView(res);
+      let quiz = res?.DT?.others?.countQuiz ?? 0;
+      let question = res?.DT?.others?.countQuestions ?? 0;
+      let answer = res?.DT?.others?.countAnswers ?? 0;
+      let user = res?.DT?.users?.countUsers ?? 0;
+
+      const data = [
+        {
+          name: "Users",
+          Total: user,
+        },
+        {
+          name: "Quizzes",
+          Total: quiz,
+        },
+        {
+          name: "Questions",
+          Total: question,
+        },
+        {
+          name: "Answers",
+          Total: answer,
+        },
+      ];
+      setDataCharts(data);
+    }
+  };
+
+  console.log(dataOverView);
   return (
     <>
       <div className="container-dashboard">
-        <h3 className="container-dashboard__title">Dash board</h3>
+        {/* <h3 className="container-dashboard__title">Dash board</h3> */}
         <div className="d-content">
           <div className="d-content__left">
-            <div className="d-content__left--item">content1</div>
-            <div className="d-content__left--item">content2</div>
-            <div className="d-content__left--item">content3</div>
-            <div className="d-content__left--item">content4</div>
+            <div className="left-item1">
+              <span className="left-item__1">Total Users</span>
+              <span className="left-item__2">
+                {dataOverView && dataOverView.DT && dataOverView.DT.users ? (
+                  <>{dataOverView.DT.users.countUsers}</>
+                ) : (
+                  <>0</>
+                )}{" "}
+              </span>
+            </div>
+            <div className="left-item2">
+              <span className="left-item__1">Total Quizzes</span>
+              <span className="left-item__2">
+                {dataOverView && dataOverView.DT && dataOverView.DT.others ? (
+                  <>{dataOverView.DT.others.countQuiz}</>
+                ) : (
+                  <>0</>
+                )}{" "}
+              </span>
+            </div>
+            <div className="left-item3">
+              <span className="left-item__1">Total Questions</span>
+              <span className="left-item__2">
+                {dataOverView && dataOverView.DT && dataOverView.DT.others ? (
+                  <>{dataOverView.DT.others.countQuestions}</>
+                ) : (
+                  <>0</>
+                )}{" "}
+              </span>
+            </div>
+            <div className="left-item4">
+              <span className="left-item__1">Total Answers</span>
+              <span className="left-item__2">
+                {dataOverView && dataOverView.DT && dataOverView.DT.others ? (
+                  <>{dataOverView.DT.others.countAnswers}</>
+                ) : (
+                  <>0</>
+                )}{" "}
+              </span>
+            </div>
           </div>
           <div className="d-content__right">
-            <AreaChart
-              width={735}
-              height={550}
-              data={data}
-              margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
-            >
-              <defs>
-                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-                  <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
-                </linearGradient>
-                <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
-                  <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
-                </linearGradient>
-              </defs>
-              <XAxis dataKey="name" />
-              <YAxis />
-              <CartesianGrid strokeDasharray="3 3" />
-              <Tooltip />
-              <Area
-                type="monotone"
-                dataKey="uv"
-                stroke="#8884d8"
-                fillOpacity={1}
-                fill="url(#colorUv)"
-              />
-              <Area
-                type="monotone"
-                dataKey="pv"
-                stroke="#82ca9d"
-                fillOpacity={1}
-                fill="url(#colorPv)"
-              />
-            </AreaChart>
+            <ResponsiveContainer width="100%" height={500}>
+              <LineChart
+                data={dataCharts}
+                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line type="monotone" dataKey="Total" stroke="#8884d8" />
+              </LineChart>
+            </ResponsiveContainer>
           </div>
         </div>
       </div>
