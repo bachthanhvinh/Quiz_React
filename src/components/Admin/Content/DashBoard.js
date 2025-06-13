@@ -13,13 +13,17 @@ import {
 import "./DashBoard.scss";
 import { useEffect, useState } from "react";
 import { getOverView } from "../../../services/apiServices";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
+
 const DashBoard = (props) => {
   const [dataOverView, setDataOverView] = useState([]);
   const [dataCharts, setDataCharts] = useState([]);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     getDataOverView();
-  }, []);
+  }, [i18n.language]);
 
   const getDataOverView = async () => {
     const res = await getOverView();
@@ -32,19 +36,19 @@ const DashBoard = (props) => {
 
       const data = [
         {
-          name: "Users",
+          name: `${i18n.language === "vi" ? "Người dùng" : "Users"}`,
           Total: user,
         },
         {
-          name: "Quizzes",
+          name: `${i18n.language === "vi" ? "Quizzes" : "Quizzes"}`,
           Total: quiz,
         },
         {
-          name: "Questions",
+          name: `${i18n.language === "vi" ? "câu hỏi" : "Questions"}`,
           Total: question,
         },
         {
-          name: "Answers",
+          name: `${i18n.language === "vi" ? "Đáp án" : "Answers"}`,
           Total: answer,
         },
       ];
@@ -53,6 +57,7 @@ const DashBoard = (props) => {
   };
 
   console.log(dataOverView);
+
   return (
     <>
       <div className="container-dashboard">
@@ -60,7 +65,9 @@ const DashBoard = (props) => {
         <div className="d-content">
           <div className="d-content__left">
             <div className="left-item1">
-              <span className="left-item__1">Total Users</span>
+              <span className="left-item__1">
+                {t("pageDashboard.totalUser")}
+              </span>
               <span className="left-item__2">
                 {dataOverView && dataOverView.DT && dataOverView.DT.users ? (
                   <>{dataOverView.DT.users.countUsers}</>
@@ -70,7 +77,9 @@ const DashBoard = (props) => {
               </span>
             </div>
             <div className="left-item2">
-              <span className="left-item__1">Total Quizzes</span>
+              <span className="left-item__1">
+                {t("pageDashboard.totalQuizzes")}
+              </span>
               <span className="left-item__2">
                 {dataOverView && dataOverView.DT && dataOverView.DT.others ? (
                   <>{dataOverView.DT.others.countQuiz}</>
@@ -80,7 +89,9 @@ const DashBoard = (props) => {
               </span>
             </div>
             <div className="left-item3">
-              <span className="left-item__1">Total Questions</span>
+              <span className="left-item__1">
+                {t("pageDashboard.totalQuestions")}
+              </span>
               <span className="left-item__2">
                 {dataOverView && dataOverView.DT && dataOverView.DT.others ? (
                   <>{dataOverView.DT.others.countQuestions}</>
@@ -90,7 +101,9 @@ const DashBoard = (props) => {
               </span>
             </div>
             <div className="left-item4">
-              <span className="left-item__1">Total Answers</span>
+              <span className="left-item__1">
+                {t("pageDashboard.totalAnswers")}
+              </span>
               <span className="left-item__2">
                 {dataOverView && dataOverView.DT && dataOverView.DT.others ? (
                   <>{dataOverView.DT.others.countAnswers}</>

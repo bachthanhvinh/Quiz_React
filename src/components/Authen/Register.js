@@ -5,6 +5,7 @@ import { IoIosEye, IoIosEyeOff, oIosEye } from "react-icons/io";
 import { RegisterUser } from "../../services/apiServices";
 import { toast } from "react-toastify";
 import Language from "../Header/Language";
+import { useTranslation } from "react-i18next";
 function Register() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -12,6 +13,7 @@ function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const checkuref = useRef(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     checkuref.current.focus();
@@ -58,71 +60,28 @@ function Register() {
     <>
       <div className="register-container   ">
         <div className="SignUp-account d-flex justify-content-end align-items-center mt-2 container">
-          <span>Already have an account?</span>
+          <span>{t("pageRegister.noAccount")}</span>
           <button
             className="btn-SignUpUser btn mx-2"
             onClick={() => handleSignup()}
           >
-            Log In
+            {t("pageRegister.signup")}
           </button>
-          <span className="me-5 text-decoration-underline">Need help?</span>
+          <span className="me-5 text-decoration-underline">
+            {" "}
+            {t("pageRegister.needhelp")}
+          </span>
           <Language />
         </div>
         <div className="form-content mx-auto col-4 ">
           <div className="text-center mt-5">
-            <h2 className="form-content__h2 mb-4">Quizform</h2>
-            <h4 className="mb-5">Start your journey?</h4>
+            <h2 className="form-content__h2 mb-4">
+              {" "}
+              {t("pageRegister.Quizform")}
+            </h2>
+            <h4 className="mb-5"> {t("pageRegister.hello")}</h4>
           </div>
 
-          {/* <form noValidate>
-            <div className="content-form ">
-              <div className="form-group">
-                <label className="mb-2">Email</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  placeholder="Email@gmail.com"
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                  autoComplete="current-email"
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label className="mb-2 mt-3">Username</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Username"
-                  value={username}
-                  onChange={(event) => setUsername(event.target.value)}
-                  autoComplete="current-username"
-                />
-              </div>
-              <div className="form-group">
-                <label className="mb-2 mt-3">Password</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                  autoComplete="current-password"
-                  required
-                />
-              </div>
-              <div className="mt-5 mb-4">
-                {" "}
-                <button
-                  type="submit"
-                  className="btn btn-register"
-                  onClick={(e) => handleSubmitRegister(e)}
-                >
-                  Register
-                </button>
-              </div>
-            </div>
-          </form> */}
           <form onSubmit={(e) => handleSubmitRegister(e)}>
             <div className="content-form">
               <div className="form-group">
@@ -139,7 +98,10 @@ function Register() {
                 />
               </div>
               <div className="form-group  Toggle-password">
-                <label className="mb-2 mt-3">Password (*)</label>
+                <label className="mb-2 mt-3">
+                  {" "}
+                  {t("pageRegister.Password")} (*)
+                </label>
                 <input
                   type={showPassword ? "text" : "password"}
                   className="form-control "
@@ -162,7 +124,10 @@ function Register() {
                 )}
               </div>
               <div className="form-group">
-                <label className="mb-2 mt-3">Username</label>
+                <label className="mb-2 mt-3">
+                  {" "}
+                  {t("pageRegister.userName")}
+                </label>
                 <input
                   type="text"
                   className="form-control"
@@ -176,13 +141,13 @@ function Register() {
 
               <div className="mt-3 mb-4">
                 <button type="submit" className="btn btn-register">
-                  Create my free account
+                  {t("pageRegister.login")}
                 </button>
               </div>
             </div>
           </form>
           <div className="text-center" onClick={() => navigate("/")}>
-            <span className="back"> &#60;&#60; Go back home</span>
+            <span className="back"> &#60;&#60; {t("pageRegister.Gohome")}</span>
           </div>
         </div>
       </div>

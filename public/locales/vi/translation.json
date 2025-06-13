@@ -24,16 +24,74 @@
       "admin": "Quản trị viên"
     }
   },
+
   "pagelogin": {
-    "noAccount": "Bạn có tài khoản chưa?",
+    "noAccount": "Bạn chưa có tài khoản?",
     "signup": "Đăng ký",
-    "needhelp": "hỗ trợ?",
+    "needhelp": "Cần hỗ trợ?",
     "Quizform": "Quizform",
-    "hello": "Xin chào, ai đây?",
+    "hello": "Xin chào, Dây là ai?",
     "Email": "Email",
     "Password": "Mật khẩu",
-    "fpassword": "Quên mật khẩu ?",
+    "fpassword": "Quên mật khẩu?",
     "login": "Đăng nhập vào Quiz",
     "Gohome": "Quay lại trang chủ"
+  },
+  "pageRegister": {
+    "noAccount": "Đã có tài khoản?",
+    "signup": "Đăng nhập",
+    "needhelp": "Cần hỗ trợ?",
+    "Quizform": "Quizform",
+    "hello": "Bắt đầu hành trình của bạn?",
+    "Email": "Email",
+    "Password": "Mật khẩu",
+    "userName": "Tên Người dùng",
+    "login": "Tạo tài khoản miễn phí",
+    "Gohome": "Quay lại trang chủ"
+  },
+  "pageUsers": {
+    "quiz": "Quiz",
+    "btnGoQuiz": "Làm bài Kiểm tra ",
+    "noData": "Bạn hiện không có bài kiểm tra nào"
+  },
+  "pageDashboard": {
+    "totalUser": "Tổng Người dùng",
+    "totalQuizzes": "Tổng  Quizzes",
+    "totalQuestions": "Tổng Câu hỏi",
+    "totalAnswers": "Tổng đáp án"
+  },
+  "pageSidebar": {
+    "dashboard": "Bảng điều khiển",
+    "ManageUser": "Quản lý người dùng",
+    "ManageQuizzes": "Quản lý Quizzes",
+    "ManageQuestions": "Quản lý câu hỏi"
+  },
+  "pageManageQuestions": {
+    "manageQuestions": "Quản lý câu hỏi",
+    "select": "Chọn Quiz:",
+    "addQuestions": "Thêm câu hỏi :",
+    "file": " 0 file Đã tải lên",
+    "save": " Lưu câu hỏi"
+  },
+  "pageManageUsers": {
+    "tableUser": {
+      "username": "Tên người dùng",
+      "Email": "Email",
+      "Role": "Vai trò",
+      "Action": "Hành động",
+      "view": "Xem",
+      "update": "Cập nhật",
+      "delete": "Xóa",
+      "notFound": "Không có dữ liệu"
+    },
+    "manageUser": {
+      "user": "Quản lý người dùng",
+      "addnewUsers": "Thêm mới người dùng"
+    }
+  },
+  "breadcrumb": {
+    "home": "Trang Chủ",
+    "users": "Người dùng",
+    "quiz": "Làm bài quiz"
   }
 }

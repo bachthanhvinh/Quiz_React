@@ -10,7 +10,7 @@
       list-style: none;
     }
     .image_Quiz {
-      height: 350px;
+      height: 330px;
       width: 600px;
       object-fit: cover;
       border-radius: 10px;
@@ -60,6 +60,18 @@
           color: red;
         }
       }
+    }
+  }
+}
+.c-breadcrumb {
+  display: flex;
+  // align-items: center;
+  justify-content: space-between;
+  padding-top: 20px;
+  .breadcrumb-item {
+    a {
+      color: rgb(30, 227, 253);
+      text-decoration: none;
     }
   }
 }

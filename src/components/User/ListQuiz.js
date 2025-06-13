@@ -4,10 +4,12 @@ import { useSelector } from "react-redux";
 import "./ListQuiz.scss";
 import { useNavigate } from "react-router-dom";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import { useTranslation } from "react-i18next";
 
 function ListQuiz() {
   const [dataQuiz, setDataQuiz] = useState([]);
   const Nagivate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     // const res = await getQuizUser();
@@ -41,7 +43,9 @@ function ListQuiz() {
                         />
                       </div>
                       <div className="card-body  ">
-                        <h5 className="card-title">Quiz {index + 1}</h5>
+                        <h5 className="card-title">
+                          {t("pageUsers.quiz")} {index + 1}
+                        </h5>
                         <p className="card-text">{quiz.description}</p>
 
                         <a
@@ -55,7 +59,7 @@ function ListQuiz() {
                             })
                           }
                         >
-                          Go Quiz now
+                          {t("pageUsers.btnGoQuiz")}
                         </a>
                       </div>
                     </div>
@@ -64,7 +68,7 @@ function ListQuiz() {
               })}
             </>
           ) : (
-            <div>You're don't have any quiz now</div>
+            <div>{t("pageUsers.noData")} </div>
           )}
         </div>
       </PerfectScrollbar>

@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getDataQuestion, postFinishResult } from "../../services/apiServices";
 import _ from "lodash";
 import "./DetailQuiz.scss";
 import Question from "./Question";
 import ModalQuizUser from "./ModalQuizUser";
 import RightContent from "./Content/RightContent";
+import { Breadcrumb } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
+import Language from "../Header/Language";
 function DetaiQuiz() {
   const param = useParams();
   const quizId = param.id;
@@ -15,6 +18,8 @@ function DetaiQuiz() {
   const [index, setIndex] = useState(0);
   const [checkShowModal, setCheckShowModal] = useState(false);
   const [dataAnswers, setDataAnswers] = useState({});
+  const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleNext = () => {
     if (dataQ && dataQ.length > index + 1) setIndex(index + 1);
@@ -130,7 +135,19 @@ function DetaiQuiz() {
   return (
     <>
       <div className="container">
-        <div className="detail-title text-center mt-5"></div>
+        <div className="c-breadcrumb">
+          <Breadcrumb>
+            <Breadcrumb.Item onClick={() => navigate("/")}>
+              {t("breadcrumb.home")}
+            </Breadcrumb.Item>
+            <Breadcrumb.Item onClick={() => navigate("/users")}>
+              {t("breadcrumb.users")}
+            </Breadcrumb.Item>
+            <Breadcrumb.Item active>{t("breadcrumb.quiz")}</Breadcrumb.Item>
+          </Breadcrumb>
+          <Language />
+        </div>
+
         <div className="detail-Quiz ">
           <div className="detail-Quiz_question">
             <div className="text-center">

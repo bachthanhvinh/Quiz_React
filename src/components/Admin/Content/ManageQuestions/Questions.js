@@ -19,6 +19,7 @@ import {
   postCreateNewQuestionForQuiz,
 } from "../../../../services/apiServices";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 function Questions() {
   const initQuiz = useMemo(
@@ -44,6 +45,7 @@ function Questions() {
   const [selectedOption, setSelectedOption] = useState(null);
   const [isPreview, setIsPreview] = useState(false);
   const [DataSelectedOption, setDataSelectedOption] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     handleClickDataOptions();
@@ -328,20 +330,22 @@ function Questions() {
     <>
       <div className="container container-question">
         <div className="mt-3">
-          <h5>Manage Questions </h5>
+          <h5>{t("pageManageQuestions.manageQuestions")} </h5>
         </div>
 
         <div className="row">
           <div className="">
             <div className=" col-6 form-group">
-              <label className="mb-1">Select Quiz:</label>
+              <label className="mb-1">{t("pageManageQuestions.select")} </label>
               <Select
                 defaultValue={selectedOption}
                 onChange={setSelectedOption}
                 options={DataSelectedOption}
               />
             </div>
-            <label className="mt-3 mb-1">Add Questions:</label>
+            <label className="mt-3 mb-1">
+              {t("pageManageQuestions.addQuestions")}{" "}
+            </label>
             {questions &&
               questions.length > 0 &&
               questions.map((q, index) => {
@@ -399,7 +403,7 @@ function Questions() {
                             </span>
                           ) : (
                             <span className="uploadfile">
-                              0 file this uploaded
+                              {t("pageManageQuestions.file")}
                             </span>
                           )}
                         </div>
@@ -508,7 +512,7 @@ function Questions() {
                   className="btn btn-warning mb-5"
                   onClick={() => handleSubmitQuestionForQuiz()}
                 >
-                  Save Question
+                  {t("pageManageQuestions.save")}
                 </button>
               </div>
             )}

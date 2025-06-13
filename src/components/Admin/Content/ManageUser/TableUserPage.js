@@ -4,6 +4,7 @@ import {
   getUserWithPaginate,
 } from "../../../../services/apiServices";
 import ReactPaginate from "react-paginate";
+import { useTranslation } from "react-i18next";
 
 const TableUserPage = (props) => {
   let LIMIT_USER = 7;
@@ -17,6 +18,7 @@ const TableUserPage = (props) => {
   } = props;
   const [listUsers, setListUsers] = useState([]);
   const [pageCount, setPageCount] = useState(0);
+  const { t } = useTranslation();
   //componentDidMount
   const handlePageClick = (event) => {
     setCurrentPage(+event.selected + 1);
@@ -47,10 +49,10 @@ const TableUserPage = (props) => {
         <thead className="table-primary text-center  ">
           <tr>
             <th scope="col">No</th>
-            <th scope="col">Username</th>
+            <th scope="col">{t("pageManageUsers.tableUser.username")}</th>
             <th scope="col">Email</th>
-            <th scope="col">Role</th>
-            <th scope="col">Action</th>
+            <th scope="col">{t("pageManageUsers.tableUser.Role")}</th>
+            <th scope="col">{t("pageManageUsers.tableUser.Action")}</th>
           </tr>
         </thead>
         <tbody>
@@ -68,7 +70,7 @@ const TableUserPage = (props) => {
                       className="btn btn-secondary"
                       onClick={() => handleClickBtnView(item)}
                     >
-                      View
+                      {t("pageManageUsers.tableUser.view")}
                     </button>
                     <button
                       className="btn btn-warning mx-3"
@@ -76,13 +78,13 @@ const TableUserPage = (props) => {
                         handleClickBtnUpdate(item);
                       }}
                     >
-                      Update
+                      {t("pageManageUsers.tableUser.update")}
                     </button>
                     <button
                       className="btn btn-danger"
                       onClick={() => handleClickBtnDelete(item)}
                     >
-                      Delete
+                      {t("pageManageUsers.tableUser.delete")}
                     </button>
                   </td>
                 </tr>
@@ -90,7 +92,7 @@ const TableUserPage = (props) => {
             })}
           {listUsers && listUsers.length === 0 && (
             <tr>
-              <td colSpan={"5"}> Not found data</td>
+              <td colSpan={"5"}> {t("pageManageUsers.tableUser.notFound")}</td>
             </tr>
           )}
         </tbody>

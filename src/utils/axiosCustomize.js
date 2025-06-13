@@ -1,6 +1,7 @@
 import axios from "axios";
 import NProgress from "nprogress";
 import { store } from "../redux/store";
+import axiosRetry from "axios-retry";
 NProgress.configure({
   showSpinner: false,
   trickleSpeed: 100,
@@ -41,6 +42,7 @@ instance.interceptors.response.use(
   },
   function (error) {
     NProgress.done();
+
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     // console.log(">>> run error :", error.response);

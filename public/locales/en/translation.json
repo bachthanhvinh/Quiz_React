@@ -35,5 +35,62 @@
     "fpassword": "Forgot password ?",
     "login": "Log in to Quiz",
     "Gohome": "Go back home"
+  },
+  "pageRegister": {
+    "noAccount": "Already have an account?",
+    "signup": "Log In",
+    "needhelp": "Need help?",
+    "Quizform": "Quizform",
+    "hello": "Start your journey?",
+    "Email": "Email",
+    "Password": "Password",
+    "userName": "Username",
+    "login": "Create my free account",
+    "Gohome": "Go back home"
+  },
+  "pageUsers": {
+    "quiz": "Quiz",
+    "btnGoQuiz": "Go quiz now",
+    "noData": "You're don't have any quiz now"
+  },
+  "pageDashboard": {
+    "totalUser": "Total Users",
+    "totalQuizzes": "Total Quizzes",
+    "totalQuestions": "Total Questions",
+    "totalAnswers": "Total Answers"
+  },
+  "pageSidebar": {
+    "dashboard": "Dashboard",
+    "ManageUser": "Manage Users",
+    "ManageQuizzes": "Manage Quizzes",
+    "ManageQuestions": "Manage Questions"
+  },
+  "pageManageQuestions": {
+    "manageQuestions": "Manage Questions",
+    "select": "Select Quiz:",
+    "addQuestions": "Add Questions",
+    "file": " 0 file this uploaded",
+    "save": " Save Question"
+  },
+  "pageManageUsers": {
+    "tableUser": {
+      "username": "Username",
+      "Email": "Email",
+      "Role": "Role",
+      "Action": "Action",
+      "view": "View",
+      "update": "Update",
+      "delete": "Delete",
+      "notFound": "Not found data"
+    },
+    "manageUser": {
+      "user": "Manage User",
+      "addnewUsers": "Add new Users"
+    }
+  },
+  "breadcrumb": {
+    "home": "Home",
+    "users": "Users",
+    "quiz": "Quiz"
   }
 }

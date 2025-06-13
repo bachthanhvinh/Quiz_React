@@ -20,10 +20,12 @@ import {
 } from "react-icons/fa";
 import sidebarBg from "../../assets/bg2.jpg";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 const SideBar = (props) => {
   const navigate = useNavigate();
   const { image, collapsed, toggled, handleToggleSidebar } = props;
-
+  const { t, i18n } = useTranslation();
+  console.log(i18n.language);
   return (
     <>
       <ProSidebar
@@ -61,19 +63,22 @@ const SideBar = (props) => {
 
               // suffix={<span className="badge red">New</span>}
             >
-              <NavLink to="/admin">Dashboard</NavLink>
+              <NavLink to="/admin">{t("pageSidebar.dashboard")}</NavLink>
             </MenuItem>
 
             {/* <MenuItem icon={<FaGem />}>Components</MenuItem> */}
           </Menu>
           <Menu iconShape="circle">
-            <SubMenu icon={<FaGem />} title={"Features"}>
+            <SubMenu
+              icon={<FaGem />}
+              title={i18n.language === "vi" ? "Quản lý" : "Manage"}
+            >
               <MenuItem>
                 <NavLink
                   to="/admin/manage-users"
                   className={({ isActive }) => (isActive ? "active_menu" : "")}
                 >
-                  Quản lý Users
+                  {t("pageSidebar.ManageUser")}
                 </NavLink>
               </MenuItem>
 
@@ -82,7 +87,7 @@ const SideBar = (props) => {
                   to="/admin/manage-quizzes"
                   className={({ isActive }) => (isActive ? "active_menu" : "")}
                 >
-                  Quản lý Bài Quiz
+                  {t("pageSidebar.ManageQuizzes")}
                 </NavLink>
               </MenuItem>
               <MenuItem>
@@ -90,7 +95,7 @@ const SideBar = (props) => {
                   to="/admin/manage-questions"
                   className={({ isActive }) => (isActive ? "active_menu" : "")}
                 >
-                  Quản lý Câu Hỏi
+                  {t("pageSidebar.ManageQuestions")}
                 </NavLink>
               </MenuItem>
             </SubMenu>

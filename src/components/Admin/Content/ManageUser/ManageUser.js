@@ -8,6 +8,7 @@ import ModalUpdateUser from "./ModalUpdateUser";
 import ModalDeleteUser from "./ModalDeleteUsesr";
 import TableUserPage from "./TableUserPage";
 import ModalViewUser from "./ModalViewUser";
+import { useTranslation } from "react-i18next";
 
 const ManageUser = (props) => {
   const [showModalCreactUser, setShowModalCreactUser] = useState(false);
@@ -20,6 +21,7 @@ const ManageUser = (props) => {
   const [dataView, setDataView] = useState({});
   const [dataDelete, setDataDelete] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
+  const { t } = useTranslation();
 
   const onReload = () => {
     setIsUserAdded((prev) => !prev);
@@ -48,14 +50,16 @@ const ManageUser = (props) => {
   return (
     <>
       <div className="manageUser-container p-2">
-        <div className="manageUser-container__title"> Manage User</div>
+        <div className="manageUser-container__title">
+          {t("pageManageUsers.manageUser.user")}
+        </div>
         <div className="manageUser-container__content">
           <div className="btn-add-new">
             <button
               className=" button-add"
               onClick={() => setShowModalCreactUser(true)}
             >
-              <FcPlus /> Add new Users
+              <FcPlus /> {t("pageManageUsers.manageUser.addnewUsers")}
             </button>
           </div>
           <div className="table-user-container">
