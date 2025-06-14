@@ -116,6 +116,12 @@ const getOverView = () => {
 const refresh_tokenUser = (email, refresh_token) => {
   return axios.post(`api/v1/refresh-token`, { email, refresh_token });
 };
+const updateProfileUser = (username, userImage) => {
+  const data = new FormData();
+  data.append("username", username);
+  data.append("userImage", userImage);
+  return axios.post("api/v1/profile", data);
+};
 export {
   postCreateNewUser,
   getAllUser,
@@ -139,4 +145,5 @@ export {
   logout,
   getOverView,
   refresh_tokenUser,
+  updateProfileUser,
 };

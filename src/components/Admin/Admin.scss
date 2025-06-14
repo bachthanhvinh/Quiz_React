@@ -58,8 +58,20 @@
     }
   }
 }
+.logo-quiz {
+  cursor: pointer;
+}
 .logo-sidebar {
   cursor: pointer;
+  animation: spinner 5s linear infinite;
+}
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 .active_menu {
   color: rgb(113 228 255) !important;

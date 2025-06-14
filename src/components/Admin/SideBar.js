@@ -21,6 +21,7 @@ import {
 import sidebarBg from "../../assets/bg2.jpg";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import "./Admin.scss";
 const SideBar = (props) => {
   const navigate = useNavigate();
   const { image, collapsed, toggled, handleToggleSidebar } = props;
@@ -47,9 +48,12 @@ const SideBar = (props) => {
               textOverflow: "ellipsis",
               whiteSpace: "nowrap",
             }}
+            className="d-flex align-items-center gap-2 "
           >
-            <FaReact size={"2em"} color="rgb(0 255 255)" />
-            <span className="logo-sidebar" onClick={() => navigate("/")}>
+            <span className="logo-sidebar">
+              <FaReact size={"2em"} color="rgb(0 255 255)" />
+            </span>
+            <span className="logo-quiz" onClick={() => navigate("/")}>
               {" "}
               Quiz
             </span>

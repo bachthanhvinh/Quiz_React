@@ -12,7 +12,10 @@ import { doLogOut } from "../../redux/action/userAction";
 import Language from "./Language";
 import { useTranslation } from "react-i18next";
 import i18n from "../../utils/i18n";
+import { useState } from "react";
+import ModalProfile from "./ModalProfile";
 const Header = () => {
+  const [show, setShow] = useState(false);
   const account = useSelector((state) => state.user.account);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const dispatch = useDispatch();
@@ -33,64 +36,70 @@ const Header = () => {
     }
   };
   const { t } = useTranslation();
+  const handleClose = () => {
+    setShow(false);
+  };
   return (
-    <Navbar expand="lg" bg="light">
-      <Container>
-        <NavLink to="/" className="navbar-brand">
-          <img className="logo-header" src={`${logo}`} alt="Logo" />
-        </NavLink>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <NavLink to="/" className="nav-link">
-              {t("header.menu.home")}
-            </NavLink>
-            <NavLink className="nav-link" to="users">
-              {t("header.menu.users")}
-            </NavLink>
-            <NavLink className="nav-link" to="admin">
-              {t("header.menu.admin")}
-            </NavLink>
-          </Nav>
-          <Nav>
-            {isAuthenticated === false ? (
-              <>
-                <button
-                  className="btn-login"
-                  onClick={() => handleClickLogin()}
-                >
-                  {t("header.authen.login")}
-                </button>
-                <button
-                  className="btn-signUp me-3"
-                  onClick={() => handleClickRegister()}
-                >
-                  {t("header.authen.signup")}
-                </button>
-                <Language />
-              </>
-            ) : (
-              <>
-                <NavDropdown
-                  title={i18n.language === "vi" ? "Tùy chỉnh" : "Settings"}
-                  id="basic-nav-dropdown"
-                >
-                  <NavDropdown.Item onClick={() => handleLogOut()}>
-                    {t("header.authen.logout")}
-                  </NavDropdown.Item>
-                  <NavDropdown.Item>
-                    {" "}
-                    {t("header.authen.profile")}
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                </NavDropdown>
-                <Language />
-              </>
-            )}
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <>
+      <Navbar expand="lg" bg="light">
+        <Container>
+          <NavLink to="/" className="navbar-brand">
+            <img className="logo-header" src={`${logo}`} alt="Logo" />
+          </NavLink>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <NavLink to="/" className="nav-link">
+                {t("header.menu.home")}
+              </NavLink>
+              <NavLink className="nav-link" to="users">
+                {t("header.menu.users")}
+              </NavLink>
+              <NavLink className="nav-link" to="admin">
+                {t("header.menu.admin")}
+              </NavLink>
+            </Nav>
+            <Nav>
+              {isAuthenticated === false ? (
+                <>
+                  <button
+                    className="btn-login"
+                    onClick={() => handleClickLogin()}
+                  >
+                    {t("header.authen.login")}
+                  </button>
+                  <button
+                    className="btn-signUp me-3"
+                    onClick={() => handleClickRegister()}
+                  >
+                    {t("header.authen.signup")}
+                  </button>
+                  <Language />
+                </>
+              ) : (
+                <>
+                  <NavDropdown
+                    title={i18n.language === "vi" ? "Tùy chỉnh" : "Settings"}
+                    id="basic-nav-dropdown"
+                  >
+                    <NavDropdown.Item onClick={() => setShow(true)}>
+                      {" "}
+                      {t("header.authen.profile")}
+                    </NavDropdown.Item>
+                    <NavDropdown.Item onClick={() => handleLogOut()}>
+                      {t("header.authen.logout")}
+                    </NavDropdown.Item>
+                    <NavDropdown.Divider />
+                  </NavDropdown>
+                  <Language />
+                </>
+              )}
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      <ModalProfile show={show} setShow={setShow} />
+    </>
   );
 };
 

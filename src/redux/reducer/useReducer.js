@@ -1,5 +1,6 @@
 import {
   FETCH_USER_LOGIN_SUCCESS,
+  UPDATE_NEWDATA_PROFILE,
   USER_LOGOUT_SUCCESS,
 } from "../action/userAction";
 
@@ -27,7 +28,7 @@ const useReducer = (state = INITIAL_STATE, action) => {
           image: action?.payLoad?.DT?.image,
           refresh_token: action?.payLoad?.DT?.refresh_token,
           role: action?.payLoad?.DT?.role,
-          uesrname: action?.payLoad?.DT?.username,
+          username: action?.payLoad?.DT?.username,
         },
 
         isAuthenticated: true,
@@ -44,6 +45,15 @@ const useReducer = (state = INITIAL_STATE, action) => {
           username: "",
         },
         isAuthenticated: false,
+      };
+    case UPDATE_NEWDATA_PROFILE:
+      return {
+        ...state,
+        account: {
+          // giá trị ở sau đè giá trị ở trước
+          ...state.account,
+          ...action.payLoad,
+        },
       };
     default:
       return state;
