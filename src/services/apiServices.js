@@ -122,6 +122,12 @@ const updateProfileUser = (username, userImage) => {
   data.append("userImage", userImage);
   return axios.post("api/v1/profile", data);
 };
+const changePasswordUser = (current_password, new_password) => {
+  return axios.post("api/v1/change-password", {
+    current_password,
+    new_password,
+  });
+};
 export {
   postCreateNewUser,
   getAllUser,
@@ -146,4 +152,5 @@ export {
   getOverView,
   refresh_tokenUser,
   updateProfileUser,
+  changePasswordUser,
 };

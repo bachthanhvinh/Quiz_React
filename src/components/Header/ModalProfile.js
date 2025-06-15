@@ -1,5 +1,6 @@
 import { Modal, Tab, Tabs } from "react-bootstrap";
 import MainInfor from "./TabsProfile/MainInfor";
+import ChangePassword from "./TabsProfile/ChangePassword";
 
 const ModalProfile = (props) => {
   const { show, setShow } = props;
@@ -28,7 +29,7 @@ const ModalProfile = (props) => {
               <MainInfor setShow={setShow} />
             </Tab>
             <Tab eventKey="Change Password" title="Change Password">
-              Tab content for Home
+              <ChangePassword />
             </Tab>
             <Tab eventKey="History" title="History">
               Tab content for Contact
