@@ -128,6 +128,9 @@ const changePasswordUser = (current_password, new_password) => {
     new_password,
   });
 };
+const getHistoryUser = () => {
+  return axios.get("api/v1/history");
+};
 export {
   postCreateNewUser,
   getAllUser,
@@ -153,4 +156,5 @@ export {
   refresh_tokenUser,
   updateProfileUser,
   changePasswordUser,
+  getHistoryUser,
 };
