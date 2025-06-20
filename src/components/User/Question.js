@@ -1,8 +1,12 @@
 import _ from "lodash";
 import { useState } from "react";
 import Lightbox from "react-awesome-lightbox";
+import { IoCheckmarkOutline } from "react-icons/io5";
+
+import { HiXMark } from "react-icons/hi2";
+import "./Question.scss";
 function Question(prop) {
-  const { data, index, handleClickCheck } = prop;
+  const { data, index, handleClickCheck, isShowTFAnswer } = prop;
   const [isPreview, setIsPreview] = useState(false);
 
   if (_.isEmpty(data)) {
@@ -12,6 +16,7 @@ function Question(prop) {
     // console.log(questionId, answerId);
     handleClickCheck(questionId, answerId);
   };
+  console.log(data);
   return (
     <>
       <div className="detail-Quiz_bodyQuestion">
@@ -54,6 +59,7 @@ function Question(prop) {
                     checked={a.isSelected && a.isSelected}
                     id={`flexCheckDefault-${index}`}
                     onChange={() => handleClickRadio(data.questionId, a.id)}
+                    disabled={isShowTFAnswer}
                   />
 
                   <label
@@ -62,6 +68,15 @@ function Question(prop) {
                   >
                     <div className="a-child">{a.description}</div>
                   </label>
+                  {isShowTFAnswer === true ? (
+                    a.isSelected === true ? (
+                      <IoCheckmarkOutline className="checkMark" />
+                    ) : (
+                      <HiXMark className="crossMark" />
+                    )
+                  ) : (
+                    ""
+                  )}
                 </div>
               );
             })}

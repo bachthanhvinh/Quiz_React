@@ -1,0 +1,20 @@
+.form-check {
+  display: flex;
+  align-items: center;
+  min-height: 1.5rem;
+  gap: 5px;
+  padding-left: 1.5em;
+  margin-bottom: 0.125rem;
+}
+.detail-Quiz_bodyQuestion {
+  .crossMark {
+    font-size: 20px;
+    color: red;
+    transform: scale(1.2);
+  }
+  .checkMark {
+    font-size: 20px;
+    color: green;
+    transform: scale(1.2);
+  }
+}

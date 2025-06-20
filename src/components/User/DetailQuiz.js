@@ -20,6 +20,8 @@ function DetaiQuiz() {
   const [dataAnswers, setDataAnswers] = useState({});
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const [checkFinish, setCheckFinish] = useState(false);
+  const [checkTrueAndFalseAnswer, setCheckTrueAndFalseAnswer] = useState(false);
 
   const handleNext = () => {
     if (dataQ && dataQ.length > index + 1) setIndex(index + 1);
@@ -82,6 +84,7 @@ function DetaiQuiz() {
     let res = await postFinishResult(payLoad);
     // console.log(" >>> Check", res);
     if (res && res.EC === 0) {
+      setCheckFinish(true);
       setCheckShowModal(true);
       setDataAnswers({
         countCorrect: res.DT.countCorrect,
@@ -131,7 +134,6 @@ function DetaiQuiz() {
       setDataQ(data);
     }
   };
-  // console.log(dataQ);
   return (
     <>
       <div className="container">
@@ -161,6 +163,7 @@ function DetaiQuiz() {
               data={dataQ && dataQ.length > 0 ? dataQ[index] : []}
               index={index}
               handleClickCheck={handleClickCheck}
+              isShowTFAnswer={checkTrueAndFalseAnswer}
             />
             <div className="detail-Quiz_pageNext text-center">
               <button
@@ -178,6 +181,7 @@ function DetaiQuiz() {
               <button
                 className="btn btn-warning"
                 onClick={() => handleFinish()}
+                disabled={checkFinish}
               >
                 Finish
               </button>
@@ -196,6 +200,7 @@ function DetaiQuiz() {
         show={checkShowModal}
         setShow={setCheckShowModal}
         dataAnswers={dataAnswers}
+        setCheckModelAnswer={setCheckTrueAndFalseAnswer}
       />
     </>
   );

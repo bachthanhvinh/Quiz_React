@@ -4,9 +4,13 @@ import Modal from "react-bootstrap/Modal";
 import { toast } from "react-toastify";
 
 function ModalQuizUser(props) {
-  const { show, setShow, dataAnswers } = props;
+  const { show, setShow, dataAnswers, setCheckModelAnswer } = props;
 
   const handleClose = () => {
+    setShow(false);
+  };
+  const handleCheckTFAnswer = () => {
+    setCheckModelAnswer(true);
     setShow(false);
   };
   // console.log(dataAnswers);
@@ -31,7 +35,10 @@ function ModalQuizUser(props) {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handleCheckTFAnswer}>
+            Hiển thị đáp án
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
             Cancel
           </Button>
         </Modal.Footer>
