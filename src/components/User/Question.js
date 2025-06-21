@@ -16,7 +16,6 @@ function Question(prop) {
     // console.log(questionId, answerId);
     handleClickCheck(questionId, answerId);
   };
-  console.log(data);
   return (
     <>
       <div className="detail-Quiz_bodyQuestion">
@@ -68,14 +67,15 @@ function Question(prop) {
                   >
                     <div className="a-child">{a.description}</div>
                   </label>
-                  {isShowTFAnswer === true ? (
-                    a.isSelected === true ? (
-                      <IoCheckmarkOutline className="checkMark" />
-                    ) : (
-                      <HiXMark className="crossMark" />
-                    )
-                  ) : (
-                    ""
+                  {isShowTFAnswer === true && (
+                    <>
+                      {a.isSelected === true && a.isCorrect === false && (
+                        <HiXMark className="crossMark" />
+                      )}
+                      {a.isCorrect === true && (
+                        <IoCheckmarkOutline className="checkMark" />
+                      )}
+                    </>
                   )}
                 </div>
               );

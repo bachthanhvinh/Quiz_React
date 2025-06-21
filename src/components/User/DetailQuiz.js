@@ -80,7 +80,7 @@ function DetaiQuiz() {
     }
     payLoad.answers = answers;
     // console.log(payLoad);
-
+    /////// post finish Result //////////////
     let res = await postFinishResult(payLoad);
     // console.log(" >>> Check", res);
     if (res && res.EC === 0) {
@@ -95,12 +95,33 @@ function DetaiQuiz() {
     if (res && res.EC !== 0) {
       console.log("error");
     }
+    //////////// UpdateAnswer/////////
+    const dataQClone = _.cloneDeep(dataQ);
+    const answerF = res.DT.quizData;
+    for (let qAnswer of answerF) {
+      for (let i = 0; i < dataQClone.length; i++) {
+        if (+qAnswer.questionId === +dataQClone[i].questionId) {
+          const newAnswer = [];
+          // console.log("i", dataQClone[i].answers.length);
+          for (let j = 0; j < dataQClone[i].answers.length; j++) {
+            let checkAnswer = qAnswer.systemAnswers.find(
+              (item) => +item.id === +dataQClone[i].answers[j].id
+            );
+            if (checkAnswer) {
+              dataQClone[i].answers[j].isCorrect = true;
+            }
+            newAnswer.push(dataQClone[i].answers[j]);
+          }
+          dataQClone[i].answers = newAnswer;
+        }
+      }
+    }
+    setDataQ(dataQClone);
   };
 
   const fetchdataQuiz = async () => {
     const res = await getDataQuestion(quizId);
     let raw = res.DT;
-    // console.log(raw);
 
     if (res && res.EC === 0) {
       let data = _.chain(raw)
@@ -118,7 +139,11 @@ function DetaiQuiz() {
               image = item.image;
             }
             if (item.answers) {
-              answers.push({ ...item.answers, isSelected: false });
+              answers.push({
+                ...item.answers,
+                isSelected: false,
+                isCorrect: false,
+              });
             }
           });
 
@@ -169,12 +194,14 @@ function DetaiQuiz() {
               <button
                 className="btn btn-secondary  "
                 onClick={() => handlePrev()}
+                disabled={index - 1 < 0 ? true : false}
               >
                 Prev
               </button>
               <button
                 className="btn btn-primary mx-3"
                 onClick={() => handleNext()}
+                disabled={dataQ.length > index + 1 ? false : true}
               >
                 Next
               </button>
