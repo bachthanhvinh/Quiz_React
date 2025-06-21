@@ -1,4 +1,5 @@
-import "react-pro-sidebar/dist/css/styles.css";
+// import "react-pro-sidebar/dist/css/styles.css";
+import "./SideBar.scss";
 import {
   ProSidebar,
   Menu,
@@ -50,13 +51,15 @@ const SideBar = (props) => {
             }}
             className="d-flex align-items-center gap-2 "
           >
-            <span className="logo-sidebar">
+            <span className="logo-sidebar" onClick={() => navigate("/")}>
               <FaReact size={"2em"} color="rgb(0 255 255)" />
             </span>
-            <span className="logo-quiz" onClick={() => navigate("/")}>
-              {" "}
-              Quiz
-            </span>
+            {!collapsed && (
+              <span className="logo-quiz" onClick={() => navigate("/")}>
+                {" "}
+                Quiz
+              </span>
+            )}
           </div>
         </SidebarHeader>
 
@@ -128,15 +131,8 @@ const SideBar = (props) => {
               rel="noopener noreferrer"
             >
               <FaGithub />
-              <span
-                style={{
-                  whiteSpace: "nowrap",
-                  textOverflow: "ellipsis",
-                  overflow: "hidden",
-                }}
-              >
-                bachthanhvin
-              </span>
+
+              {!collapsed && <span>bachthanhvin</span>}
             </a>
           </div>
         </SidebarFooter>

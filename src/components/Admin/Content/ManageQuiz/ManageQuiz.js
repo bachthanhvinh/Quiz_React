@@ -6,7 +6,7 @@ import TableQuizzes from "./TableQuizzes";
 import ModalUpdateQuiz from "./ModalUpdateQuiz";
 import ModalViewQuiz from "./ModalViewQuiz";
 import ModalDeleteQuiz from "./ModalDeleteQuiz";
-import { Accordion } from "react-bootstrap";
+import { Tab, Tabs } from "react-bootstrap";
 import QuizQA from "./QuizQA";
 import AssignQuiz from "./AssignQuiz";
 function ManageQuiz(props) {
@@ -41,79 +41,75 @@ function ManageQuiz(props) {
   };
   return (
     <>
-      <Accordion defaultActiveKey="0">
-        <Accordion.Item eventKey="0">
-          <Accordion.Header>Manage Quiz</Accordion.Header>
-          <Accordion.Body>
-            <div className="manageQuiz-container p-2">
-              {/* <div className="manageQuiz-container__title"> Manage Quiz</div> */}
-              <div className="manageQuiz-container__content">
-                <div className="btn-add-new-quiz">
-                  <button
-                    className=" button-add"
-                    onClick={() => setShowModalCreactQuiz(true)}
-                  >
-                    <FcPlus /> Add new Quizs
-                  </button>
-                </div>
-                <div className="table-Quiz-container">
-                  <TableQuizzes
-                    isCreateQuiz={isCreateQuiz}
-                    handleClickBtnUpdate={handleClickBtnUpdate}
-                    handleClickBtnView={handleClickBtnView}
-                    handleClickBtnDelete={handleClickBtnDelete}
-                    // setCurrentPage={setCurrentPage}
-                    // currentPage={currentPage}
-                  />
-                </div>
-                <ModalCreateQuiz
-                  show={showModalCreactQuiz}
-                  setShow={setShowModalCreactQuiz}
-                  onReload={onReload}
-                  // setCurrentPage={setCurrentPage}
-                  // currentPage={currentPage}
-                />
-                <ModalUpdateQuiz
-                  show={showModalUpdateQuiz}
-                  setShow={setShowModalUpdateQuiz}
-                  dataModal={dataModal}
-                  onReload={onReload}
-                  resetDataModal={resetDataModal}
-                  // setCurrentPage={setCurrentPage}
-                  // currentPage={currentPage}
-                />
-                <ModalViewQuiz
-                  show={showModalViewQuiz}
-                  setShow={setShowModalViewQuiz}
-                  dataModal={dataModal}
-                  // onReload={onReload}
-                  resetDataModal={resetDataModal}
-                />
-                <ModalDeleteQuiz
-                  show={showModalDeleteQuiz}
-                  setShow={setShowModalDeleteQuiz}
-                  dataDelete={dataModal}
-                  onReload={onReload}
+      <Tabs
+        defaultActiveKey="Manage Quiz"
+        id="uncontrolled-tab-example"
+        className="mb-3 "
+        justify
+      >
+        <Tab eventKey="Manage Quiz" title="Manage Quiz">
+          <div className="manageQuiz-container p-2">
+            {/* <div className="manageQuiz-container__title"> Manage Quiz</div> */}
+            <div className="manageQuiz-container__content">
+              <div className="btn-add-new-quiz">
+                <button
+                  className=" button-add"
+                  onClick={() => setShowModalCreactQuiz(true)}
+                >
+                  <FcPlus /> Add new Quizs
+                </button>
+              </div>
+              <div className="table-Quiz-container">
+                <TableQuizzes
+                  isCreateQuiz={isCreateQuiz}
+                  handleClickBtnUpdate={handleClickBtnUpdate}
+                  handleClickBtnView={handleClickBtnView}
+                  handleClickBtnDelete={handleClickBtnDelete}
                   // setCurrentPage={setCurrentPage}
                   // currentPage={currentPage}
                 />
               </div>
+              <ModalCreateQuiz
+                show={showModalCreactQuiz}
+                setShow={setShowModalCreactQuiz}
+                onReload={onReload}
+                // setCurrentPage={setCurrentPage}
+                // currentPage={currentPage}
+              />
+              <ModalUpdateQuiz
+                show={showModalUpdateQuiz}
+                setShow={setShowModalUpdateQuiz}
+                dataModal={dataModal}
+                onReload={onReload}
+                resetDataModal={resetDataModal}
+                // setCurrentPage={setCurrentPage}
+                // currentPage={currentPage}
+              />
+              <ModalViewQuiz
+                show={showModalViewQuiz}
+                setShow={setShowModalViewQuiz}
+                dataModal={dataModal}
+                // onReload={onReload}
+                resetDataModal={resetDataModal}
+              />
+              <ModalDeleteQuiz
+                show={showModalDeleteQuiz}
+                setShow={setShowModalDeleteQuiz}
+                dataDelete={dataModal}
+                onReload={onReload}
+                // setCurrentPage={setCurrentPage}
+                // currentPage={currentPage}
+              />
             </div>
-          </Accordion.Body>
-        </Accordion.Item>
-        <Accordion.Item eventKey="1">
-          <Accordion.Header>Update Q/A Quizzes</Accordion.Header>
-          <Accordion.Body>
-            <QuizQA />
-          </Accordion.Body>
-        </Accordion.Item>
-        <Accordion.Item eventKey="2">
-          <Accordion.Header>Assign Quizzes</Accordion.Header>
-          <Accordion.Body>
-            <AssignQuiz />
-          </Accordion.Body>
-        </Accordion.Item>
-      </Accordion>
+          </div>
+        </Tab>
+        <Tab eventKey="Update Q/A Quizzes" title="Update Q/A Quizzes">
+          <QuizQA />
+        </Tab>
+        <Tab eventKey="Assign Quizzes" title="Assign Quizzes">
+          <AssignQuiz />
+        </Tab>
+      </Tabs>
     </>
   );
 }

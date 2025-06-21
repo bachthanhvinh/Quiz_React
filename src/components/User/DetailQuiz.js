@@ -96,27 +96,49 @@ function DetaiQuiz() {
       console.log("error");
     }
     //////////// UpdateAnswer/////////
+    // const dataQClone = _.cloneDeep(dataQ);
+    // const answerF = res.DT.quizData;
+    // for (let qAnswer of answerF) {
+    //   for (let i = 0; i < dataQClone.length; i++) {
+    //     if (+qAnswer.questionId === +dataQClone[i].questionId) {
+    //       const newAnswer = [];
+    //       // console.log("i", dataQClone[i].answers.length);
+    //       for (let j = 0; j < dataQClone[i].answers.length; j++) {
+    //         let checkAnswer = qAnswer.systemAnswers.find(
+    //           (item) => +item.id === +dataQClone[i].answers[j].id
+    //         );
+    //         if (checkAnswer) {
+    //           dataQClone[i].answers[j].isCorrect = true;
+    //         }
+    //         newAnswer.push(dataQClone[i].answers[j]);
+    //       }
+    //       dataQClone[i].answers = newAnswer;
+    //     }
+    //   }
+    // }
+    // setDataQ(dataQClone);
     const dataQClone = _.cloneDeep(dataQ);
     const answerF = res.DT.quizData;
-    for (let qAnswer of answerF) {
-      for (let i = 0; i < dataQClone.length; i++) {
-        if (+qAnswer.questionId === +dataQClone[i].questionId) {
-          const newAnswer = [];
-          // console.log("i", dataQClone[i].answers.length);
-          for (let j = 0; j < dataQClone[i].answers.length; j++) {
-            let checkAnswer = qAnswer.systemAnswers.find(
-              (item) => +item.id === +dataQClone[i].answers[j].id
-            );
-            if (checkAnswer) {
-              dataQClone[i].answers[j].isCorrect = true;
-            }
-            newAnswer.push(dataQClone[i].answers[j]);
-          }
-          dataQClone[i].answers = newAnswer;
-        }
-      }
+
+    const answerMap = new Map();
+    for (const q of answerF) {
+      const ids = new Set(q.systemAnswers.map((item) => +item.id));
+      answerMap.set(+q.questionId, ids);
     }
-    setDataQ(dataQClone);
+
+    const updateData = dataQClone.map((question) => {
+      const systemAnswerIds = answerMap.get(+question.questionId);
+      if (!systemAnswerIds) return question;
+      const updatedAnswers = question.answers.map((answer) => ({
+        ...answer,
+        isCorrect: systemAnswerIds.has(+answer.id),
+      }));
+      return {
+        ...question,
+        answers: updatedAnswers,
+      };
+    });
+    setDataQ(updateData);
   };
 
   const fetchdataQuiz = async () => {

@@ -51,3 +51,15 @@
     }
   }
 }
+.nav-tabs .nav-link {
+  background-color: transparent !important;
+  color: #686767;
+  // border-top: none !important;
+  // border-left: none !important;
+  // border-right: none !important;
+}
+
+.nav-tabs .nav-link.active {
+  // border-bottom: solid 1px #d80b0b !important;
+  color: #07b4e9 !important;
+}
