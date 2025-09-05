@@ -2,10 +2,14 @@ import { useRef } from "react";
 import "../DetailQuiz.scss";
 import CountDown from "./CountDown";
 const RightContent = (props) => {
-  const { dataQ, handleFinish, setIndex } = props;
+  const { dataQ, handleFinish, setIndex, checkFinish } = props;
   const refDiv = useRef([]);
   const timeOut = () => {
-    handleFinish();
+    if (!checkFinish) {
+      console.log('hết giờ rồi nộp bài!')
+      handleFinish()
+    }
+    return
   };
   const getClassQuestions = (question) => {
     // console.log(question);

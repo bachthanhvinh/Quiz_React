@@ -55,9 +55,14 @@ const Header = () => {
               <NavLink className="nav-link" to="users">
                 {t("header.menu.users")}
               </NavLink>
-              <NavLink className="nav-link" to="admin">
-                {t("header.menu.admin")}
-              </NavLink>
+              {
+              account.role === 'ADMIN' &&
+                 <NavLink className="nav-link" to="admin">
+                    {t("header.menu.admin")}
+                  </NavLink>
+
+              }
+    
             </Nav>
             <Nav>
               {isAuthenticated === false ? (

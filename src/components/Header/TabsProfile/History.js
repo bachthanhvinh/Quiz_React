@@ -23,8 +23,13 @@ const History = () => {
         name: item?.quizHistory?.name,
       });
     });
-    if (resultData && resultData.length > 7) {
-      let newData = resultData.slice(resultData.length - 7, resultData.length);
+    // if (resultData && resultData.length > 7) {
+    //   let newData = resultData.slice(resultData.length - 7, resultData.length);
+    //   setHistoryUser(newData);
+    //   // console.log(resultData);
+    // }
+    if (resultData ) {
+      let newData = resultData.slice(0, resultData.length);
       setHistoryUser(newData);
       // console.log(resultData);
     }

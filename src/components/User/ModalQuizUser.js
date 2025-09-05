@@ -1,13 +1,12 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-
-import { toast } from "react-toastify";
-
+import { useNavigate } from "react-router-dom";
 function ModalQuizUser(props) {
   const { show, setShow, dataAnswers, setCheckModelAnswer } = props;
-
+  const navigate = useNavigate() 
   const handleClose = () => {
     setShow(false);
+    navigate('/users')
   };
   const handleCheckTFAnswer = () => {
     setCheckModelAnswer(true);

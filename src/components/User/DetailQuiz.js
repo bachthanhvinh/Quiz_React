@@ -238,6 +238,7 @@ function DetaiQuiz() {
           </div>
           <div className="detail-Quiz_countDown">
             <RightContent
+              checkFinish={checkFinish}
               dataQ={dataQ}
               handleFinish={handleFinish}
               setIndex={setIndex}

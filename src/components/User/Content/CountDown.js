@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 
 const CountDown = (props) => {
   const { timeOut } = props;
-  const [count, setCount] = useState(300);
+  const [count, setCount] = useState(10);
 
   useEffect(() => {
     if (count === 0) {
-      timeOut();
+      timeOut()
       return;
     }
     const times = setInterval(() => {

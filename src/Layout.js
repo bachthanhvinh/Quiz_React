@@ -1,10 +1,9 @@
 import App from "./App";
-import User from "./components/User/User";
 import Admin from "./components/Admin/Admin";
 import HomePage from "./components/Home/HomePage";
 import DashBoard from "./components/Admin/Content/DashBoard";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Bounce, ToastContainer, toast } from "react-toastify";
+import { Route, Routes } from "react-router-dom";
+import { Bounce, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./components/Authen/Login";
 import Register from "./components/Authen/Register";
@@ -16,6 +15,7 @@ import ManageUser from "./components/Admin/Content/ManageUser/ManageUser";
 import ManageQuestion from "./components/Admin/Content/ManageQuestions/ManageQuestions";
 import PrivateRouter from "./components/routes/PrivateRouter";
 import { Suspense } from "react";
+import PrivateAdminRouter from "./components/routes/PrivateAdminRouter";
 // import { Suspense } from "react";
 
 function Layout() {
@@ -39,9 +39,9 @@ function Layout() {
         <Route
           path="admin"
           element={
-            <PrivateRouter>
+            <PrivateAdminRouter>
               <Admin />
-            </PrivateRouter>
+            </PrivateAdminRouter>
           }
         >
           <Route index element={<DashBoard />} />
