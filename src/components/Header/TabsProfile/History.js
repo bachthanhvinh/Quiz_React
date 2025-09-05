@@ -28,8 +28,8 @@ const History = () => {
     //   setHistoryUser(newData);
     //   // console.log(resultData);
     // }
-    if (resultData ) {
-      let newData = resultData.slice(0, resultData.length);
+    if (resultData && resultData.length > 5 ) {
+      let newData = resultData.slice(resultData.length - 5, resultData.length );
       setHistoryUser(newData);
       // console.log(resultData);
     }

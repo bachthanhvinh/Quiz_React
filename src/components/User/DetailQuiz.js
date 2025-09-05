@@ -22,6 +22,8 @@ function DetaiQuiz() {
   const { t } = useTranslation();
   const [checkFinish, setCheckFinish] = useState(false);
   const [checkTrueAndFalseAnswer, setCheckTrueAndFalseAnswer] = useState(false);
+  const [count, setCount] = useState(300);
+
 
   const handleNext = () => {
     if (dataQ && dataQ.length > index + 1) setIndex(index + 1);
@@ -139,6 +141,7 @@ function DetaiQuiz() {
       };
     });
     setDataQ(updateData);
+    setCount(0)
   };
 
   const fetchdataQuiz = async () => {
@@ -238,6 +241,8 @@ function DetaiQuiz() {
           </div>
           <div className="detail-Quiz_countDown">
             <RightContent
+              count={count}
+              setCount={setCount}
               checkFinish={checkFinish}
               dataQ={dataQ}
               handleFinish={handleFinish}

@@ -2,7 +2,7 @@ import { useRef } from "react";
 import "../DetailQuiz.scss";
 import CountDown from "./CountDown";
 const RightContent = (props) => {
-  const { dataQ, handleFinish, setIndex, checkFinish } = props;
+  const { dataQ, handleFinish, setIndex, checkFinish, count, setCount } = props;
   const refDiv = useRef([]);
   const timeOut = () => {
     if (!checkFinish) {
@@ -39,7 +39,11 @@ const RightContent = (props) => {
   return (
     <>
       <div className="main-timer">
-        <CountDown timeOut={timeOut} />
+        <CountDown 
+        timeOut={timeOut}
+        count={count}
+        setCount={setCount}
+        />
       </div>
       <div className="main-question">
         {dataQ?.length > 0 &&

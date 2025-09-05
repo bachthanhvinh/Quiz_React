@@ -55,7 +55,7 @@ function Layout() {
         <Route path="*" element={<Error404 />} />
       </Routes>
       <ToastContainer
-        position="top-right"
+        position="bottom-right"
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}

@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
 const CountDown = (props) => {
-  const { timeOut } = props;
-  const [count, setCount] = useState(10);
+  const { timeOut, count, setCount } = props;
 
   useEffect(() => {
     if (count === 0) {
